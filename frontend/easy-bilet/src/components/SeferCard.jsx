@@ -2,7 +2,7 @@ import React from "react";
 
 function SeferCard() {
   return (
-    <div className="row border p-3 rounded align-items-center">
+    <div className="row justify-content-center border p-3 rounded align-items-center">
       <div className="col-3">otobüs Firması</div>
       <div className="col-3">kalkış Saati</div>
       <div className="col-3">Ücret</div>
