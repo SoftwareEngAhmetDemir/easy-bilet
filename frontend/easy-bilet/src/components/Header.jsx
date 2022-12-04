@@ -18,7 +18,7 @@ function Header() {
       </div>
       </div>
       <nav className="color-dark head-2">
-        <ul className="container list-unstyled ">
+        <ul className="container list-unstyled py-4">
           <li>
             <NavLink to={"biletal"} className="d-inline-block">
               <h4>
