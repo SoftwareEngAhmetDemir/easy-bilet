@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function SeferCard() {
   return (
@@ -7,7 +8,10 @@ function SeferCard() {
       <div className="col-3">kalkış Saati</div>
       <div className="col-3">Ücret</div>
       <div className="col-3 d-flex justify-content-center">
-        <button className="btn btn-primary">Koltuk Seç</button>
+        <Link className="btn btn-primary" to={"koltuksec"}>
+          {" "}
+          Koltuk Seç
+        </Link>
       </div>
     </div>
   );

@@ -1,0 +1,12 @@
+.koltukSec{
+    img{
+        min-width: 75px;
+    }
+}
+@include media-breakpoint-down(md){
+    .koltukSec{
+        img{
+            min-width: 50px;
+        }
+    }
+}
