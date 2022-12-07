@@ -1,0 +1,5 @@
+export let msg={
+    ok: 200,
+    error: 400,
+    createdSucess: 201
+}
