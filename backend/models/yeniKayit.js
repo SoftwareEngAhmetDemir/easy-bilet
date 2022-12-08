@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const yeniKayit = new Schema({
-  ad: String, // String is shorthand for {type: String}
-  soyad: String,
+  ad: { type : String , required : true }, // String is shorthand for {type: String}
+  soyad: { type : String , required : true },
   email:  { type : String , unique : true, required : true, dropDups: true },
-  parola: String,
+  parola: { type : String , required : true },
 });
 export default yeniKayit;
