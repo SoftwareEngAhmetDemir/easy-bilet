@@ -17,7 +17,8 @@ function Login() {
             style={{ background: "#E8F0FE" }}
             className="d-flex form-control py-0 inp-c"
           >
-            <img width="25px" src="./assets/email.svg" />{" "}
+            {/* <img width="25px" src="./assets/email.svg" />{" "} */}
+            <i className="icon-email"></i>
             <input
               type="email"
               class="form-control form-control-inp border-0"
@@ -36,7 +37,8 @@ function Login() {
             style={{ background: "#E8F0FE" }}
             className="d-flex form-control py-0 inp-c"
           >
-            <img width="25px" src="./assets/lock.svg" />
+            {/* <img width="25px" src="./assets/lock.svg" /> */}
+            <i className="icon-lock"></i>
             <input
               type="password"
               class="form-control form-control-inp border-0"
