@@ -1,4 +1,5 @@
 import express from 'express';
+import { msg } from './controllers/responseMsgs.js';
 
 
 const app = express()
@@ -20,7 +21,14 @@ app.use(
   );
 
 const routing = require('./routes/index.js')
-
+app.post('/*',(req,res,next)=>{
+  if (req.url === '/' || req.url === '/login' || req.url === 'yenikayit') return next();
+ else {
+  if(req.session.token === undefined)
+  return res.json({msg:msg.Unauthorized })
+  else return next();
+ }
+})
 app.use('/', routing)
 
 app.listen(port, () => {

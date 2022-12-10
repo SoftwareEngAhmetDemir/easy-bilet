@@ -15,13 +15,13 @@ const saltRounds = 10;
 
 api.post("/", (req, res) => {
 
-  console.log(req.session);
   const myPlaintextPassword = req.body.parola || "root";
   bcrypt.hash(myPlaintextPassword, saltRounds, function (err, hash) {
     req.body.parola = hash;
     req.session.hash = hash;
     const kayit = new kayitModel(req.body);
     kayit.save(function (err, result) {
+    
       if (err) {
         res.json({ msg: msg.error });
       } else {

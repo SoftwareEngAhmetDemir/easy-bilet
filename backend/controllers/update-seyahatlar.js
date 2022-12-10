@@ -11,15 +11,14 @@ mongoose.connect(uri);
 const seyahatlarModel = mongoose.model("seyahatlar", seyahatlar);
 api.post("/", (req, res) => {
     var id = req.body._id;
-  console.log(req.body._id);
+//   console.log(req.body._id);
 
   seyahatlarModel.findByIdAndUpdate(
      id ,
     {
-          $push: {
+        $addToSet: {
             filled: req.body.numberOfSeat,
           },
-        
         },
     function (err, docs) {
       if (err) return res.json({ msg: msg.error });
