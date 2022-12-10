@@ -13,10 +13,10 @@
         border-color: #66afe9;
         box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
         i {
-            color: $primary !important;
-            font-weight: 600 !important;
+            color: $danger !important;
+            font-weight: 500 !important;
             scale: 1.05 !important;
-            text-shadow: 0.5px 0.5px 0.5px #66afe9;
+            text-shadow: 0.5px 0.5px 0.5px $danger;
           }
     }
 }
