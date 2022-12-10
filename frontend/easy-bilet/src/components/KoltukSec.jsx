@@ -38,14 +38,14 @@ function KoltukSec() {
       <div className="row align-items-center border p-lg-5 p-3">
         {dataSeats.map((e) => {
           return (
-            <div key={e.id} className={`mt-1 d-flex justify-content-center align-items-center col-lg-2 col-3`}>
+            <div key={e.id} className={`d-flex justify-content-center align-items-center col-lg-2 col-3`}>
               {/* <img
                 className={`imges ${e.bos ? "d-none" : "d-block"}`}
                 src="/assets/seat.svg"
                 width={"50%"}
                 height="auto"
               /> */}
-              <i className="icon-seat h-100">
+              <i className="icon-seat">
 
               </i>
             </div>
