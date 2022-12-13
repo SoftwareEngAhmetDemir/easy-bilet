@@ -25,8 +25,9 @@ const routing = require('./routes/index.js')
   app.use(cors())
 app.post('/*',(req,res,next)=>{
   console.log(req.url);
-  if (req.url === '/' || req.url === '/login' || req.url === '/yenikayit') return next();
+  if (req.url === '/' || req.url === '/login' || req.url === '/yenikayit' || req.url === '/logout') return next();
  else {
+  
   jwt.verify(req.session.token, 'secret', function(err, decoded) {
     if(err) return res.json({msg:msg.Unauthorized });
     else

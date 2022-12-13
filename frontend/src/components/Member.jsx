@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
+
 function Member() {
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -13,9 +14,8 @@ function Member() {
   });
   const onSubmit = (data) => {
     console.log(data);
-axios.post('http://localhost:8090/yenikayit',data).then(data=>{
-console.log(data.data.msg)
-})
+    axios.post('http://localhost:8090/yenikayit',data).then(data=>{
+    })
   }
   return (
     <div className="uye-ol row justify-content-center">
