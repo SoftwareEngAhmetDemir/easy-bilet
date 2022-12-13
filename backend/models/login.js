@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const login = new Schema({
-  email:  String,
-  parola: String,
+  email:  {type: String},
+  parola: {type: String,required: true,default:"abc"},
 });
 export default login;

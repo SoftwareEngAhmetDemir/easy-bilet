@@ -14,13 +14,13 @@ const bcrypt = require("bcrypt");
 
 api.post("/", async (req, res) => {
 
-  loginModel.findOne({ email: req.body.email }, function (err, docs) {
+ await loginModel.findOne({ email: req.body.email }, function (err, docs) {
     if (err) return res.json({ msg: msg.error });
-
-    bcrypt.compare(req.body.parola, docs.parola, async function (err, result) {
+if(!docs)return  res.json({msg: msg.LoginFaild})
+    bcrypt.compare(req.body.parola, docs.parola,  function (err, result) {
       if (err) return res.json({ msg: msg.error });
       if (result === true) {
-        let token = await jwt.sign(
+        let token =  jwt.sign(
           {
             ...req.body
           },
@@ -28,8 +28,8 @@ api.post("/", async (req, res) => {
           { expiresIn: 60 * 60 }
         );
         req.session.token = token;
-        res.json({ msg: msg.ok });
-      } else res.json({ msg: msg.error });
+       return  res.json({ msg: msg.ok });
+      } else return  res.json({ msg: msg.error });
     });
   });
 });

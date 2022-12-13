@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -9,13 +9,24 @@ import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { StyledEngineProvider } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 function BiletAl() {
   const [value, setValue] = React.useState(dayjs("2022-04-07"));
+  const nereden= useRef(null);
+  const nereye= useRef(null);
+
+const submit=()=>{
+  console.log(nereden)
+  console.log(value.$d);
+  console.log(nereye)
+}
+
+
   return (
-      <div className="biletAl">
-      <form className="row">
-        <div class="col-lg-3 col-12 dropdown p-lg-0 my-lg-0 mb-3">
-          <select class="form-select" aria-label="Default select example">
+      <div className="biletAl mt-3">
+      <form className="row border rounded p-4" style={{maxWidth:'500px'}} onSubmit={e=>e.preventDefault()}>
+        <div class="col-lg-3 col-12 dropdown p-lg-0 my-lg-0 mb-3" style={{minWidth:'200px'}}>
+          <select class="form-select" ref={nereden} aria-label="Default select example" onChange={e => {nereden.current = e.target.value}}>
             <option selected>Nereden</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -23,8 +34,8 @@ function BiletAl() {
           </select>
         </div>
 
-        <div class="ms-lg-3 ms-0 col-lg-3 col-12 dropdown p-lg-0 my-lg-0 my-3">
-        <select class="form-select" aria-label="Default select example">
+        <div class="ms-lg-3 ms-0 col-lg-3 col-12 dropdown p-lg-0 my-lg-0 my-3" style={{minWidth:'200px'}}>
+        <select class="form-select" aria-label="Default select example" ref={nereye} onChange={e => {nereye.current = e.target.value}}>
             <option selected>Nereye</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -33,7 +44,7 @@ function BiletAl() {
         </div>
         <div className="row"></div>
         <div style={{ marginTop: "20px" }}></div>
-        <div className="px-lg-0 col-lg-3 col-12 my-lg-0 mt-2">
+        <div className="px-lg-0 col-lg-3 col-12 my-lg-0 mt-2" style={{minWidth:'200px'}}>
           <StyledEngineProvider injectFirst>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
@@ -72,7 +83,7 @@ function BiletAl() {
         </div>
         <div className="row"></div>
        <div className="px-lg-0 p-3 col-lg-3 mt-3">
-       <Link to='sefersec' class="btn btn-primary w-100 p-lg p-2">Bilet Bul</Link>
+       <button to='sefersec' class="btn btn-primary w-100 p-lg p-2" onClick={submit}>Bilet Bul</button>
        </div>
       </form>
     </div>

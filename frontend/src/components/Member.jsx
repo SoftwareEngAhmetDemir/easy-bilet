@@ -1,40 +1,70 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useForm, Controller } from "react-hook-form";
+import axios from "axios";
 function Member() {
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      ad: "",
+      soyad: "",
+      email: "",
+      parola: "",
+    },
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+axios.post('http://localhost:8090/yenikayit',data).then(data=>{
+console.log(data.data.msg)
+})
+  }
   return (
     <div className="uye-ol row justify-content-center">
       <div className="p-0 col-lg-5 col-8 d-flex justify-content-lg-start justify-content-center">
         <h2>Üye Ol</h2>
       </div>
       <div className="row"></div>
-      <form className="row justify-content-center">
-        <div class="mb-3 p-0 col-lg-5 col-8 input-c">
-          <label for="exampleFormControlInput1" class="form-label">
-           Ad
+      <form
+        className="row justify-content-center"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="mb-3 p-0 col-lg-5 col-8 input-c">
+          <label forhtml="exampleFormControlInput11" className="form-label">
+            Ad
           </label>
-          <input
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Ad"
+          <Controller
+            name="ad"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput11"
+                placeholder="Ad"
+              />
+            )}
           />
         </div>
         <div className="row"></div>
-        <div class="mb-3 p-0 col-lg-5 col-8">
-          <label for="exampleFormControlInput1" class="form-label">
+        <div className="mb-3 p-0 col-lg-5 col-8">
+          <label forhtml="exampleFormControlInput12" className="form-label">
             Soyad
           </label>
-          <input 
-            type="text"
-            class="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Soyad"
-          />
+          <Controller
+        name="soyad"
+        control={control}
+        render={({ field }) => <input {...field}
+        type="text"
+        className="form-control"
+        id="exampleFormControlInput12"
+        placeholder="Soyad"
+      />}
+      />
+          
         </div>
         <div className="row"></div>
-        <div class="mb-3 p-0 col-lg-5 col-8">
-          <label for="exampleFormControlInput1" class="form-label p-0">
+        <div className="mb-3 p-0 col-lg-5 col-8">
+          <label forhtml="exampleFormControlInput22" className="form-label p-0">
             Email address
           </label>
           <div
@@ -43,18 +73,24 @@ function Member() {
           >
             {/* <img width="25px" src="./assets/email.svg" />{" "} */}
             <i className="icon-email"></i>
-            <input
-              type="email"
-              class="form-control form-control-inp border-0"
-              style={{ outline: "none" }}
-              id="exampleFormControlInput1"
-              placeholder="name@example.com"
-            />
+            <Controller
+        name="email"
+        control={control}
+        render={({ field }) =>
+        <input {...field}
+        type="email"
+        className="form-control form-control-inp border-0"
+        style={{ outline: "none" }}
+        id="exampleFormControlInput22"
+        placeholder="name@example.com"
+      />}
+      />
+            
           </div>
         </div>
         <div className="row"></div>
-        <div class="mb-3 p-0 col-lg-5 col-8">
-          <label for="exampleFormControlInput2" class="form-label p-0">
+        <div className="mb-3 p-0 col-lg-5 col-8">
+          <label forhtml="exampleFormControlInput23" className="form-label p-0">
             Parola
           </label>
           <div
@@ -63,18 +99,29 @@ function Member() {
           >
             {/* <img width="25px" src="./assets/lock.svg" /> */}
             <i className="icon-lock"></i>
-            <input
-              type="password"
-              class="form-control form-control-inp border-0"
-              style={{ outline: "none" }}
-              id="exampleFormControlInput2"
-              placeholder="name@example.com"
-            />
+            <Controller
+        name="parola"
+        control={control}
+        render={({ field }) => 
+        <input {...field}
+        type="password"
+        className="form-control form-control-inp border-0"
+        style={{ outline: "none" }}
+        id="exampleFormControlInput23"
+        placeholder="name@example.com"
+      />}
+      />
+            
           </div>
         </div>
         <div className="row"></div>
         <div className="p-0 col-lg-5 col-8 d-lg-block d-flex justify-content-center">
-          <button style={{ width: "161px" }} className="py-2 px-5 btn btn-primary">Kayıt Ol</button>
+          <button
+            style={{ width: "161px" }}
+            className="py-2 px-5 btn btn-primary"
+          >
+            Kayıt Ol
+          </button>
         </div>
       </form>
       <div className="row justify-content-center mt-4">
@@ -92,7 +139,7 @@ function Member() {
                 className="stretched-link color-white d-flex"
                 style={{ color: "white" }}
               >
-               Üye Giriş
+                Üye Giriş
               </Link>
             </button>
           </div>
