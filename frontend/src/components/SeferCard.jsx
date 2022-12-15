@@ -2,10 +2,11 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function SeferCard({detaylar}) {
+  console.log(detaylar)
   const navigate = useNavigate();
   const koltukAl = ()=>{
     // to={"koltuksec"}
-    navigate("koltuksec",{state:{koltuklar:detaylar.filled,koltukSayisi: detaylar.maxfilled}});
+    navigate("koltuksec",{state:{data:detaylar}});
   }
   return (
     <div className="row justify-content-center border p-3 rounded align-items-center">

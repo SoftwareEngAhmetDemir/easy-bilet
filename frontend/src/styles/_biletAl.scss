@@ -19,7 +19,9 @@
 
 @include media-breakpoint-down(lg) {
   .biletAl {
-    width: 100%;
+    width: 95%;
     margin: 0;
+    left: 0%;
+    transform: translateX(2.5%);
   }
 }

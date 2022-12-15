@@ -1,4 +1,8 @@
 .koltukSec {
+    .selected{
+        color: $primary;
+        scale: 1.1;
+    }
     i {
         font-size: 75px;
     }
@@ -9,6 +13,7 @@
             color: $danger;
             scale: 1.1;
         }
+       
     }
 .numbers{
     
