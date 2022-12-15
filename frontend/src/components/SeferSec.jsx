@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import SeferCard from "./SeferCard";
 
 function SeferSec() {
+  const location = useLocation();
+  console.log(location.state);
+  let seyahatlar = location.state.seyahatlar;
   return (
     <div >
       <div className="mb-3 p-0">
@@ -12,7 +15,7 @@ function SeferSec() {
       </div>
    
         {
-            [1,2,3,4,5,6,7].map(e=> <div className="container mt-3"><SeferCard/></div>)
+            seyahatlar.map(e=> <div className="container mt-3"><SeferCard detaylar={e}/></div>)
         }
      
     

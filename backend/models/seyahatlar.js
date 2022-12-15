@@ -5,6 +5,7 @@ const seyahatlar = new Schema({
     // _id: {type: String},
     otobusFirmasi: { type : String  }, // String is shorthand for {type: String}
     kalkisSaati: { type : String  },
+    Tarih: {type: Date},
     varisSaati: {type: String},
     fromTo:  { type : String },
     Ucret: { type : Number  },

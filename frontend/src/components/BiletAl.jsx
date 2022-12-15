@@ -8,43 +8,115 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { StyledEngineProvider } from "@mui/material";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import cities from "../cities.json";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 function BiletAl() {
   const [value, setValue] = React.useState(dayjs("2022-04-07"));
-  const nereden= useRef(null);
-  const nereye= useRef(null);
+  const nereden = useRef(null);
+  const nereye = useRef(null);
 
-const submit=()=>{
-  console.log(nereden)
-  console.log(value.$d);
-  console.log(nereye)
-}
-
+  const navigate = useNavigate();
+  const submit = () => {
+    let from = nereden.current;
+    let to = nereye.current;
+    console.log(typeof from);
+    if (typeof from !== "string") from = "1";
+    if (typeof to !== "string") to = "1";
+    let config = {
+      fromTo: from + "-" + to,
+    };
+    axios
+      .post(
+        "/seyahatlar",
+        {
+          ...config,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json;charset=UTF-8",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        let { data } = res;
+        if (data.msg === 200) {
+          console.log(data);
+          let {results} = data;
+          console.log(results);
+          navigate("sefersec",{state:{seyahatlar:results}});
+        }
+        else if(data.msg === 404)
+        window.alert("Yolculuk yoktur")
+      });
+  };
+  const entries = Object.entries(cities);
 
   return (
-      <div className="biletAl mt-3">
-      <form className="row border rounded p-4" style={{maxWidth:'500px'}} onSubmit={e=>e.preventDefault()}>
-        <div class="col-lg-3 col-12 dropdown p-lg-0 my-lg-0 mb-3" style={{minWidth:'200px'}}>
-          <select class="form-select" ref={nereden} aria-label="Default select example" onChange={e => {nereden.current = e.target.value}}>
-            <option selected>Nereden</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+    <div className="biletAl mt-3">
+      <form
+        className="row border rounded p-4"
+        style={{ maxWidth: "500px" }}
+        onSubmit={(e) => e.preventDefault()}
+      >
+        <div
+          className="col-lg-3 col-12 dropdown p-lg-0 my-lg-0 mb-3"
+          style={{ minWidth: "200px" }}
+        >
+          <select
+            className="form-select"
+            ref={nereden}
+            aria-label="Default select example"
+            onChange={(e) => {
+              nereden.current = e.target.value;
+            }}
+          >
+            <option defaultValue disabled>
+              Nereden
+            </option>
+            {entries.map((e) => {
+              return (
+                <option key={e[0]} value={e[0]}>
+                  {e[1]}
+                </option>
+              );
+            })}
           </select>
         </div>
 
-        <div class="ms-lg-3 ms-0 col-lg-3 col-12 dropdown p-lg-0 my-lg-0 my-3" style={{minWidth:'200px'}}>
-        <select class="form-select" aria-label="Default select example" ref={nereye} onChange={e => {nereye.current = e.target.value}}>
-            <option selected>Nereye</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+        <div
+          className="ms-lg-3 ms-0 col-lg-3 col-12 dropdown p-lg-0 my-lg-0 my-3"
+          style={{ minWidth: "200px" }}
+        >
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            ref={nereye}
+            onChange={(e) => {
+              nereye.current = e.target.value;
+            }}
+          >
+            <option defaultValue disabled>
+              Nereye
+            </option>
+            {entries.map((e) => {
+              return (
+                <option key={e[0]} value={e[0]}>
+                  {e[1]}
+                </option>
+              );
+            })}
           </select>
         </div>
         <div className="row"></div>
         <div style={{ marginTop: "20px" }}></div>
-        <div className="px-lg-0 col-lg-3 col-12 my-lg-0 mt-2" style={{minWidth:'200px'}}>
+        <div
+          className="px-lg-0 col-lg-3 col-12 my-lg-0 mt-2"
+          style={{ minWidth: "200px" }}
+        >
           <StyledEngineProvider injectFirst>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Stack spacing={3}>
@@ -57,34 +129,20 @@ const submit=()=>{
                   className="w-100"
                   renderInput={(params) => <TextField {...params} />}
                 />
-                {/* <DesktopDatePicker
-          label="For desktop"
-          value={value}
-          minDate={dayjs('2017-01-01')}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-        <DatePicker
-          disableFuture
-          label="Responsive"
-          openTo="year"
-          views={['year', 'month', 'day']}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        /> */}
               </Stack>
             </LocalizationProvider>
           </StyledEngineProvider>
         </div>
         <div className="row"></div>
-       <div className="px-lg-0 p-3 col-lg-3 mt-3">
-       <button to='sefersec' class="btn btn-primary w-100 p-lg p-2" onClick={submit}>Bilet Bul</button>
-       </div>
+        <div className="px-lg-0 p-3 col-lg-3 mt-3">
+          <button
+            to="sefersec"
+            className="btn btn-primary w-100 p-lg p-2"
+            onClick={submit}
+          >
+            Bilet Bul
+          </button>
+        </div>
       </form>
     </div>
   );

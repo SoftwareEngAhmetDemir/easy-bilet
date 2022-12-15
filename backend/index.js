@@ -1,13 +1,12 @@
 import express from 'express';
 import { msg } from './controllers/responseMsgs.js';
 
-
 const app = express()
 const port = 8090;
 var bodyParser  = require('body-parser');
 import jwt from "jsonwebtoken";
 import cors from 'cors'
-
+var tokenglobal = "";
 var session = require('express-session')
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -24,11 +23,16 @@ app.use(
 const routing = require('./routes/index.js')
   app.use(cors())
 app.post('/*',(req,res,next)=>{
-  console.log(req.url);
+  // res.append('namebackend', 'ahmed demir');
+  res.set("Access-Control-Expose-Headers", "*");
+  
   if (req.url === '/' || req.url === '/login' || req.url === '/yenikayit' || req.url === '/logout') return next();
  else {
-  
-  jwt.verify(req.session.token, 'secret', function(err, decoded) {
+  console.log("here")
+  console.log(req.headers.token)
+console.log('finish')
+  jwt.verify(req.headers.token, 'secret', function(err, decoded) {
+    // res.setHeader
     if(err) return res.json({msg:msg.Unauthorized });
     else
     return next();

@@ -1,9 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
+
+
 function Login() {
-  const { control, handleSubmit,formState: { errors } } = useForm({
+  const navigate = useNavigate();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       email: "",
       parola: "",
@@ -14,21 +21,26 @@ function Login() {
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Origin": "*"
       },
     };
 
     axios
       .post(
-        "http://localhost:8090/login",
+        "/login",
         {
           email: data.email || "",
           parola: data.parola || "",
         },
         axiosConfig
       )
-      .then((data) => {
-        console.log(data.data.msg);
+      .then(({ data }) => {
+        let { msg } = data;
+        if (msg === 200) {
+          navigate("/biletal");
+        } else {
+          window.alert("Şifre Veya Kullanıcı adı yanlıştır");
+        }
       })
       .catch((err) => err);
   };
@@ -58,12 +70,12 @@ function Login() {
               control={control}
               rules={{
                 required: true,
-               validate: "email"
-               }}
+                validate: "email",
+              }}
               render={({ field }) => (
                 <input
                   {...field}
-                  aria-invalid={errors.mail ? "true" : "false"} 
+                  aria-invalid={errors.mail ? "true" : "false"}
                   type="email"
                   className="form-control form-control-inp border-0"
                   style={{ outline: "none" }}

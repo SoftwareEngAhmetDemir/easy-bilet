@@ -14,7 +14,7 @@ function Member() {
   });
   const onSubmit = (data) => {
     console.log(data);
-    axios.post('http://localhost:8090/yenikayit',data).then(data=>{
+    axios.post('/yenikayit',data).then(data=>{
     })
   }
   return (

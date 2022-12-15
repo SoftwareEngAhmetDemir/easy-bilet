@@ -1,17 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function SeferCard() {
+function SeferCard({detaylar}) {
+  const navigate = useNavigate();
+  const koltukAl = ()=>{
+    // to={"koltuksec"}
+    navigate("koltuksec",{state:{koltuklar:detaylar.filled,koltukSayisi: detaylar.maxfilled}});
+  }
   return (
     <div className="row justify-content-center border p-3 rounded align-items-center">
-      <div className="col-3">otobüs Firması</div>
-      <div className="col-3">kalkış Saati</div>
-      <div className="col-3">Ücret</div>
+      <div className="col-3">{detaylar.otobusFirmasi}</div>
+      <div className="col-3">{detaylar.kalkisSaati}</div>
+      <div className="col-3">{detaylar.Ucret} TL</div>
       <div className="col-3 d-flex justify-content-center">
-        <Link className="btn btn-primary" to={"koltuksec"}>
+        <button className="btn btn-primary" onClick={koltukAl}>
           {" "}
           Koltuk Seç
-        </Link>
+        </button>
       </div>
     </div>
   );
