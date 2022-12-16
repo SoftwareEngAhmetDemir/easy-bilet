@@ -21,12 +21,22 @@ function BiletAl() {
   const submit = () => {
     let from = nereden.current;
     let to = nereye.current;
-    console.log(typeof from);
+   console.log(value)
+    let month = value.$D < 9 ? "0"+value.$D:value.$D;
+    let day = value.$M+1< 9 ? "0"+value.$M+1:value.$M+1;
+    let year = value.$y< 9 ? "0"+value.$y:value.$y;
+  
+    let fullHistory = year +"-"+day+"-"+month;
+
     if (typeof from !== "string") from = "1";
     if (typeof to !== "string") to = "1";
     let config = {
       fromTo: from + "-" + to,
+      tarih: fullHistory
     };
+   
+    
+    console.log(fullHistory);
     axios
       .post(
         "/seyahatlar",
