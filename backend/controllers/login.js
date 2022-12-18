@@ -23,7 +23,7 @@ api.post("/",  async(req, res) => {
          {
            ...req.body
           },
-          "secret",
+          "my secret word",
           { expiresIn: 60 * 60 }
           );
           req.session.token = token;

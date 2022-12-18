@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import EeasyBiletInput from "./EeasyBiletInput";
+import { AppContext } from "../Authentication/context";
 
 function Login() {
+  const [auth,setAuth]  = useContext(AppContext);
   const navigate = useNavigate();
   const {
     control,
@@ -37,6 +39,7 @@ function Login() {
       .then(({ data }) => {
         let { msg } = data;
         if (msg === 200) {
+          setAuth(true);
           navigate("/biletal");
         } else {
           window.alert("Şifre Veya Kullanıcı adı yanlıştır");

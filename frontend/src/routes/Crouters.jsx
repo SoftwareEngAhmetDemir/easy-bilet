@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { AppContext } from "../Authentication/context";
+import Auth from "../components/Auth";
 import BiletAl from "../components/BiletAl";
 import ErrorPage from "../components/ErrorPage";
 import KoltukSec from "../components/KoltukSec";
@@ -10,9 +12,12 @@ import SeferSec from "../components/SeferSec";
 import Seyahatlarim from "../components/Seyahatlarim";
 
 function Croutes() {
+  const [auth,setAuth]  = useContext(AppContext);
   return (
     <Routes>
-      <Route path="/biletal">
+    { auth===true? 
+    <>
+    <Route path="/biletal">
         <Route index element={<BiletAl />}/>
         <Route path="sefersec">
           <Route index element={<SeferSec />}/>
@@ -22,9 +27,12 @@ function Croutes() {
             </Route>
           </Route>
       </Route>
-      <Route path="/login" element={<Login />}></Route>
       <Route path="/seyahatlarim" element={<Seyahatlarim />}></Route>
+    </>
+    : <Route path="*" element={<Auth />} />}
+     
       <Route path="/Member" element={<Member />}></Route>
+      <Route path="/login" element={<Login />}></Route>
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );
