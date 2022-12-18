@@ -7,7 +7,6 @@ function SeferBilgileri({data,koltukNo}) {
  let from = data.fromTo.split("-")[0];
  let to = data.fromTo.split("-")[1];
 
- console.log(cities[from], cities[to])
   return (
     <div className="border rounded p-4 pb-5">
       <div>

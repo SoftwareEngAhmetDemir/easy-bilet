@@ -9,10 +9,11 @@ const odeme = new Schema({
     fromTo:  { type : String },
     Ucret: { type : Number },
     email: {type: String}, // if current user's mail is same logged mail lists all toursts
-    cepTel: {type : Number},
+    cep: {type : Number},
     ad: {type: String},
     soyad: {type: String},
     tc: {type: String},
+    cvv2: {type:String},
     tarih : {type : Date , default : new Date()}
 });
 

@@ -5,30 +5,32 @@ import { useLocation, useNavigate } from "react-router-dom";
 function KoltukSec() {
   let index = -1;
   let prevIndex = -1;
- 
-useEffect(()=>{
-  document.getElementById("odeme").disabled = true;
-},[])
+
+  useEffect(() => {
+    document.getElementById("odeme").disabled = true;
+  }, []);
   const getIndex = (indexV) => {
     document.getElementById("odeme").disabled = false;
     prevIndex = index;
     index = indexV;
-    if(prevIndex!==-1)
-    document.getElementById(prevIndex).classList.remove("selected");
+    if (prevIndex !== -1)
+      document.getElementById(prevIndex).classList.remove("selected");
 
     document.getElementById(index).classList.add("selected");
     // refbtn.current.disabled = false
- 
   };
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const odemefunc = () => {
-    console.log('called')
-    navigate("odeme",{state:{data:location.state.data,koltukNo:index}});
+    console.log("called");
+    console.log(location.state.data);
+    navigate("odeme", {
+      state: { data: location.state.data, koltukNo: index },
+    });
   };
- 
+
   const { maxfilled, filled } = location.state.data;
   let dataSeats = [];
   for (let i = 0; i < maxfilled; i++) {
@@ -82,10 +84,10 @@ useEffect(()=>{
         <div className="row d-md-none d-block"></div>
         <div className="col-6 mt-md-0 mt-2  d-flex justify-content-md-end">
           <button
-           id="odeme"
+            id="odeme"
             // to={"odeme"}
-          
-            onClick={()=>odemefunc()}
+
+            onClick={() => odemefunc()}
             className="btn btn-primary w-25"
             style={{ minWidth: "161px" }}
           >

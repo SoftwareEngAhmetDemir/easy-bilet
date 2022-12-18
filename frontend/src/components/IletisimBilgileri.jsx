@@ -1,6 +1,8 @@
 import React from "react";
+import { Controller } from "react-hook-form";
+import EeasyBiletInput from "./EeasyBiletInput";
 
-function IletisimBilgileri() {
+function IletisimBilgileri({ control }) {
   return (
     <div className="mt-lg-0 mt-3 border rounded p-4 pb-5">
       <div>
@@ -8,28 +10,20 @@ function IletisimBilgileri() {
       </div>
       <div className="row">
         <div className="col-12 px-2">
-        <label forhtml="exampleFormControlInput2" className="form-label p-0">
+          <label forhtml="exampleFormControlInput2" className="form-label p-0">
             E-posta
           </label>
-          <input
-            type="text"
-            className="form-control form-control-inp border-0"
-            style={{ outline: "none" }}
-            id="exampleFormControlInput2"
-            placeholder="name@example.com"
+          <EeasyBiletInput
+            control={control}
+            name={"email"}
+            placeholder="email"
           />
         </div>
         <div className="col-12 pt-2 px-2">
-        <label forhtml="exampleFormControlInput2" className="form-label p-0">
+          <label forhtml="exampleFormControlInput2" className="form-label p-0">
             Cep Tel
           </label>
-          <input
-            type="text"
-            className="form-control form-control-inp border-0"
-            style={{ outline: "none" }}
-            id="exampleFormControlInput2"
-            placeholder="name@example.com"
-          />
+          <EeasyBiletInput control={control} name={"cep"} placeholder="cep" />
         </div>
       </div>
     </div>

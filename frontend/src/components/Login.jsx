@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
-
+import EeasyBiletInput from "./EeasyBiletInput";
 
 function Login() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function Login() {
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
     };
 
@@ -65,24 +65,10 @@ function Login() {
             {/* <img width="25px" src="./assets/email.svg" />{" "} */}
             <i className="icon-email"></i>
 
-            <Controller
-              name="email"
+            <EeasyBiletInput
               control={control}
-              rules={{
-                required: true,
-                validate: "email",
-              }}
-              render={({ field }) => (
-                <input
-                  {...field}
-                  aria-invalid={errors.mail ? "true" : "false"}
-                  type="email"
-                  className="form-control form-control-inp border-0"
-                  style={{ outline: "none" }}
-                  id="exampleFormControlInput1"
-                  placeholder="name@example.com"
-                />
-              )}
+              name={"email"}
+              placeholder="email"
             />
           </div>
         </div>
@@ -98,19 +84,10 @@ function Login() {
             {/* <img width="25px" src="./assets/lock.svg" /> */}
             <i className="icon-lock"></i>
 
-            <Controller
-              name="parola"
+            <EeasyBiletInput
               control={control}
-              render={({ field }) => (
-                <input
-                  {...field}
-                  type="password"
-                  className="form-control form-control-inp border-0"
-                  style={{ outline: "none" }}
-                  id="exampleFormControlInput2"
-                  placeholder="name@example.com"
-                />
-              )}
+              name={"parola"}
+              placeholder="parola"
             />
           </div>
         </div>
