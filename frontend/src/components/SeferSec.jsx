@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Security } from "../Authentication/context";
 import SeferCard from "./SeferCard";
 
 function SeferSec() {
+  // const [auth,setAuth]  = useContext(Security);
+  // console.log(auth)
   const location = useLocation();
   console.log(location.state);
   let seyahatlar = location.state.seyahatlar;
@@ -15,7 +18,7 @@ function SeferSec() {
       </div>
    
         {
-            seyahatlar.map(e=> <div className="container mt-3"><SeferCard detaylar={e}/></div>)
+            seyahatlar.map(e=> <div key={e._id} className="container mt-3"><SeferCard detaylar={e}/></div>)
         }
      
     

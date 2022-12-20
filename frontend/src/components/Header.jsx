@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import {  NavLink } from "react-router-dom";
+import { setCookie } from "..";
+import { Security } from "../Authentication/context";
 
 function Header() {
+  const [auth,setAuth]  = useContext(Security);
+  const logout=()=>{
+    console.log("logout")
+    setCookie("token","",0);
+  }
   return (
     <header id="header">
       <div className=" head-1">
@@ -9,7 +16,7 @@ function Header() {
         <h1>EasyBilet.com</h1>
         <ul className="d-flex h-100 list-unstyled bread-crumb align-items-center">
           <li>
-            <NavLink to={"login"}>Üye Giriş</NavLink>
+           {!auth.authunticated? <NavLink to={"login"}>Üye Giriş</NavLink>:<NavLink to={"/login"} onClick={logout}>Çıkış yap</NavLink>}
           </li>
           <li>
             <NavLink to={"seyahatlarim"}>Seyahatlarım</NavLink>

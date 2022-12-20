@@ -8,6 +8,7 @@ import seyahatlar from '../controllers/seyahatlar';
 import updateSeyahatlat from '../controllers/update-seyahatlar';
 import odeme from '../controllers/odeme';
 import logout from '../controllers/logout';
+import decode from '../controllers/decode';
 
 router.use('/yeniKayit', yeniKayit)
 router.use('/login', login)
@@ -15,5 +16,5 @@ router.use('/logout', logout)
 router.use('/seyahatlar',seyahatlar)
 router.use('/updateseyahatlar',updateSeyahatlat)
 router.use('/odeme',odeme)
-
+router.use('/decode',decode)
 module.exports = router

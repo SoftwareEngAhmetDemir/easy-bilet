@@ -15,18 +15,23 @@ const bcrypt = require("bcrypt");
 api.post("/",  async(req, res) => {
 
  const user = await   loginModel.findOne({ email: req.body.email })
+ 
+
  if(user){
-   bcrypt.compare(req.body.parola, user.parola, async function (err, result) {
+   bcrypt.compare(req.body.parola, user.parola, function (err, result) {
      if (err) return res.json({ msg: msg.error });
      if (result === true) {
-       let token = await  jwt.sign(
+      let {ad,soyad,email} = user._doc
+       let token =   jwt.sign(
          {
-           ...req.body
+           ad,soyad,email
           },
           "my secret word",
-          { expiresIn: 60 * 60 }
+          { expiresIn: '1h' }
           );
           req.session.token = token;
+         
+          res.append("username",user.ad);
           res.append("token",token);
        
        return  res.json({ msg: msg.ok });

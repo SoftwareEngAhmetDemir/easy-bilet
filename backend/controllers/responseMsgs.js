@@ -4,5 +4,6 @@ export let msg={
     createdSucess: 201,
     Unauthorized : 401,
     LoginFaild: 401,
-    ThereIsNoRecords: 404
+    ThereIsNoRecords: 404,
+    NoToken: 405
 }

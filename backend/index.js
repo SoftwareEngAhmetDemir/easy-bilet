@@ -30,11 +30,11 @@ app.post("/*", (req, res, next) => {
     req.url === "/" ||
     req.url === "/login" ||
     req.url === "/yenikayit" ||
-    req.url === "/logout"
+    req.url === "/logout" || req.url === "/decode"
   ){
-    console.log("here");
+    console.log("1");
     console.log(req.headers.token);
-    console.log("finish");
+    console.log("11");
     return next();
   }
     else {

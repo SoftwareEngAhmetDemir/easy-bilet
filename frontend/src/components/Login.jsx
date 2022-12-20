@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
 import EeasyBiletInput from "./EeasyBiletInput";
-import { AppContext } from "../Authentication/context";
+import { Security } from "../Authentication/context";
+import { getCookie, setCookie } from "..";
+// import { AppContext } from "../Authentication/context";
 
 function Login() {
-  const [auth,setAuth]  = useContext(AppContext);
+  const [auth,setAuth]  = useContext(Security);
   const navigate = useNavigate();
+  
   const {
     control,
     handleSubmit,
@@ -18,8 +21,35 @@ function Login() {
       parola: "",
     },
   });
+  useEffect(() => {
+    console.log("alo")
+    let token = getCookie("token");
+    if(token.length<0) return;
 
-  const onSubmit = (data) => {
+    axios.post(
+      "/decode",
+      {
+        token: token,
+      },
+      {}).then(({data})=>{
+       
+        let {msg,decoded} = data;
+        if(msg === 200){
+          setAuth({
+            email: decoded.email,
+            username: decoded.ad,
+            token: token,
+            authunticated: true
+          })
+          
+          // if(window.location.pathname==="/login")
+          navigate("/biletal");
+        }
+      })
+      return ()=>{
+      }
+  }, []);
+  const onSubmit = (Fdata) => {
     let axiosConfig = {
       headers: {
         "Content-Type": "application/json;charset=UTF-8",
@@ -31,15 +61,21 @@ function Login() {
       .post(
         "/login",
         {
-          email: data.email || "",
-          parola: data.parola || "",
+          email: Fdata.email || "",
+          parola: Fdata.parola || "",
         },
         axiosConfig
       )
-      .then(({ data }) => {
+      .then(({ data ,...res}) => {
         let { msg } = data;
         if (msg === 200) {
-          setAuth(true);
+          setAuth({
+            email: Fdata.email,
+            username: res.headers.username,
+            token: res.headers.token,
+            authunticated: true
+          })
+          
           navigate("/biletal");
         } else {
           window.alert("Şifre Veya Kullanıcı adı yanlıştır");
@@ -121,6 +157,7 @@ function Login() {
           </div>
         </div>
       </div>
+     
     </div>
   );
 }

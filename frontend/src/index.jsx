@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
@@ -8,22 +8,22 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import App from "./App";
-import axios from 'axios';
-import { redirect } from "react-router-dom";
-axios.defaults.baseURL = 'http://localhost:8090';
+import axios from "axios";
 
-function setCookie(cName, cValue, expDays) {
+axios.defaults.baseURL = "http://localhost:8090";
+
+export function setCookie(cName, cValue, expHours) {
   let date = new Date();
-  date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+  date.setTime(date.getTime() + expHours * 60*60 * 1000); // 1 hour
   const expires = "expires=" + date.toUTCString();
   document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
 }
-function getCookie(cname) {
+export function getCookie(cname) {
   let name = cname + "=";
-  let ca = document.cookie.split(';');
-  for(let i = 0; i < ca.length; i++) {
+  let ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
     let c = ca[i];
-    while (c.charAt(0) == ' ') {
+    while (c.charAt(0) == " ") {
       c = c.substring(1);
     }
     if (c.indexOf(name) == 0) {
@@ -32,42 +32,48 @@ function getCookie(cname) {
   }
   return "";
 }
-axios.interceptors.response.use(
+ axios.interceptors.response.use(
   function (response) {
-    if(response.headers.token!==undefined){
-    axios.defaults.headers.common['token'] = response.headers.token;
-    setCookie('token', response.headers.token,  60 * 60); 
-  }
-  if(response.data.msg === 401){
-    window.location.href="/login";
-  }
-  console.log(response);
+    let token = getCookie("token");
+    if (response.headers.token !== undefined) {
+      axios.defaults.headers.common["token"] = response.headers.token;
+      setCookie("token", response.headers.token, 1);
+    }
+    if ((response.url !== "/login" || response.url !== "/Member") && token.length === 0) {
+      response.headers.token = token;
+    }
+    if (response.data.msg === 401) {
+      window.location.href = "/login";
+    }
+
     return response;
   },
   function (error) {
-   
     return Promise.reject(error);
   }
 );
-axios.interceptors.request.use(req => {
+axios.interceptors.request.use((req) => {
   console.log(req.url);
-  let token = getCookie("token")
-
-  if((req.url!=='/login' || req.url!=='/Member') && token.length===0){
-  req.headers.token= token;
+  let token = getCookie("token");
+if(token.length>0){
+  axios.defaults.headers.common["token"] = token;
+}
+  if ((req.url !== "/login" || req.url !== "/Member") && token.length === 0) {
+    req.headers.token = token;
   }
-  if(req.data.msg === 401){
-    window.location.href="/login";
+  if (req.data.msg === 401) {
+    window.location.href = "/login";
   }
   return req;
-  })
-// axios.defaults.withCredentials = true
- let rootE = document.getElementById("root") ;
+});
+
+let rootE = document.getElementById("root");
 const root = ReactDOM.createRoot(rootE);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Header />
+    
+   
       <App />
       {/* <Footer /> */}
     </BrowserRouter>
