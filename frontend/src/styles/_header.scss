@@ -48,6 +48,14 @@
 }
 @include media-breakpoint-down(lg){
     #header {
-    
-    }
+      ul.bread-crumb {
+      
+        li {
+          padding: 0 5px;
+          &:not(:last-child)::after {
+          margin-left: 7px;
+          }
+        }
+        }
+      }
 }
