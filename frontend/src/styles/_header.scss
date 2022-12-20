@@ -21,7 +21,8 @@
     // height: 80px !important;
   }
   ul.bread-crumb {
-   
+    position: relative;
+    top: 12px;
     font-size: 1.125em;
     li {
       padding: 0 10px;
@@ -37,6 +38,12 @@
   ul.second-header{
     background-color: #F6F7F8;
 
+  }
+  .logout-btn{
+    cursor: pointer;
+    &:hover{
+      color: $primary
+    }
   }
 }
 @include media-breakpoint-down(lg){
