@@ -7,7 +7,7 @@ import { msg } from "./responseMsgs";
 const uri =
   "mongodb+srv://nour:nour@cluster0.bhwsyqn.mongodb.net/?retryWrites=true&w=majority";
 mongoose.connect(uri);
-const odemeModel = mongoose.model("odeme", odeme);
+export const odemeModel = mongoose.model("odeme", odeme);
 
 api.post("/", (req, res) => {
     const Odemekayit = new odemeModel(req.body);

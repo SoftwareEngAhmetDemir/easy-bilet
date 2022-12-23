@@ -10,13 +10,14 @@ var tokenglobal = "";
 var session = require("express-session");
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
+const oneDay = 1000 * 60 * 60 * 24;
 // parse application/json
 app.use(bodyParser.json());
 app.use(
   session({
     resave: false,
     saveUninitialized: true,
+    cookie: { maxAge: oneDay },
     secret: "anyrandomstring",
   })
 );
@@ -32,9 +33,7 @@ app.post("/*", (req, res, next) => {
     req.url === "/yenikayit" ||
     req.url === "/logout" || req.url === "/decode"
   ){
-    console.log("1");
-    console.log(req.headers.token);
-    console.log("11");
+
     return next();
   }
     else {

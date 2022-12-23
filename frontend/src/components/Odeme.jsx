@@ -6,10 +6,13 @@ import OdemeBilgileri from "./OdemeBilgileri";
 import SeferBilgileri from "./SeferBilgileri";
 import YolcuBilgileri from "./YolcuBilgileri";
 import axios from "axios";
-
+import cities from '../cities.json'
 function Odeme() {
   const location = useLocation();
   const Data = location.state.data;
+  console.log(Data)
+  let from = cities[Data.fromTo.split("-")[0]];
+  let to = cities[Data.fromTo.split("-")[1]];
   const { handleSubmit, control, reset } = useForm({
     defaultValues: {
       ad: "",
@@ -22,10 +25,10 @@ function Odeme() {
       cvv2: "",
     },
   });
+  console.log(from , to)
   const onSubmit = (data) => {
     console.log(data);
- 
-    let req1 = axios.post("/odeme", data);
+    let req1 = axios.post("/odeme", {...data,fromTo:`${from}-${to}`,otobusFirmasi:Data.otobusFirmasi,Ucret:Data.Ucret});
     let req2 = axios.post("/updateseyahatlar", {
       _id: Data._id,
       numberOfSeat: location.state.koltukNo,

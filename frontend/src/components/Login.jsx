@@ -41,7 +41,6 @@ function Login() {
             token: token,
             authunticated: true
           })
-          
           // if(window.location.pathname==="/login")
           navigate("/biletal");
         }

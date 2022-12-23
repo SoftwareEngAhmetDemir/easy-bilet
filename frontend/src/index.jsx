@@ -32,6 +32,7 @@ export function getCookie(cname) {
   }
   return "";
 }
+
  axios.interceptors.response.use(
   function (response) {
     let token = getCookie("token");
@@ -45,7 +46,7 @@ export function getCookie(cname) {
     if (response.data.msg === 401) {
       window.location.href = "/login";
     }
-
+// response.headers.toki = "ahmed"
     return response;
   },
   function (error) {
@@ -58,6 +59,7 @@ axios.interceptors.request.use((req) => {
 if(token.length>0){
   axios.defaults.headers.common["token"] = token;
 }
+
   if ((req.url !== "/login" || req.url !== "/Member") && token.length === 0) {
     req.headers.token = token;
   }

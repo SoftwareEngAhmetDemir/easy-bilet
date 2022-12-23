@@ -18,6 +18,7 @@ function Croutes() {
   
 
   useEffect(() => {
+    console.log("works")
     let token = getCookie("token");
     if(token.length<0) return;
 
@@ -37,7 +38,7 @@ function Croutes() {
             authunticated: true
           })
          
-          navigate("/biletal");
+          // navigate("/biletal");
         }
       })
   }, []);
@@ -55,7 +56,7 @@ function Croutes() {
             </Route>
           </Route>
       </Route>
-      <Route path="/seyahatlarim" element={<Seyahatlarim />}></Route>
+      <Route path="/seyahatlarim" element={<Seyahatlarim auth={auth}/>}></Route>
     </>
      : <Route path="*" element={<Auth />} />} 
      
