@@ -10,7 +10,7 @@ function Seyahatlarim() {
   const [auth, setAuth] = useContext(Security);
   const [results, setResults] = useState([]);
   const [start, SetStart] = useState(0);
-  const [max, setMax] = useState(0);
+  const [numberOfBtns, setNumberOfBtns] = useState(0);
   let end = 5;
   const get_data = async () => {
     await axios
@@ -18,7 +18,7 @@ function Seyahatlarim() {
       .then(({ data }) => {
         let { records, msg, maxRecordNumbers } = data;
         let numberOfButtons = maxRecordNumbers / end;
-        setMax(numberOfButtons);
+        setNumberOfBtns(numberOfButtons);
         setResults(records);
       });
   };
@@ -75,7 +75,7 @@ function Seyahatlarim() {
                 nextLabel="next >"
                 onPageChange={handlePageClick}
                 pageRangeDisplayed={5}
-                pageCount={max}
+                pageCount={numberOfBtns}
                 previousLabel="< previous"
                 renderOnZeroPageCount={null}
               />
