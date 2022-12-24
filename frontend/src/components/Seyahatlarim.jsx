@@ -23,9 +23,11 @@ function Seyahatlarim() {
       });
   };
   useEffect(() => {
-    setTimeout(() => {
+  
       get_data();
-    }, 0);
+    return ()=>{
+      console.log('finished')
+    }
   }, [start]);
   const handlePageClick = (event) => {
     SetStart(event.selected);
@@ -40,7 +42,7 @@ function Seyahatlarim() {
         <div>
           <div className="mb-3 p-0">
             <Link
-              to={"../"}
+              to={"/biletal"}
               style={{ width: "161px" }}
               className="btn btn-danger"
             >

@@ -18,7 +18,7 @@ api.post("/", (req, res) => {
     seyahatlarimModel
       .find({ email: req.body.email })
       .limit(end)
-      .skip(start*(end-1)),
+      .skip(start*(end)),
     seyahatlarimModel.find({ email: req.body.email }).count(),
   ])
     .then(([records, recordNumbers]) => {
