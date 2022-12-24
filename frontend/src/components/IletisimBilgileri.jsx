@@ -17,13 +17,16 @@ function IletisimBilgileri({ control }) {
             control={control}
             name={"email"}
             placeholder="email"
+            type="email"
+            pattern="[a-z0-9._%+-]{1,40}[@]{1}[a-z]{1,10}[.]{1}[a-z]{3}"
           />
         </div>
         <div className="col-12 pt-2 px-2">
           <label forhtml="exampleFormControlInput2" className="form-label p-0">
             Cep Tel
           </label>
-          <EeasyBiletInput control={control} name={"cep"} placeholder="cep" />
+          <EeasyBiletInput control={control} name={"cep"} 
+          type="text" placeholder="cep" format="*(***)-***-**-**" mask="0(...)-...-..-.." />
         </div>
       </div>
     </div>

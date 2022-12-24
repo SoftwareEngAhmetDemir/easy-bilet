@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Security } from "../Authentication/context";
 import SeyahatlarinCard from "./SeyahatlarinCard";
 import axios from "axios";
-import useApi from "../hooks/useApi";
 import ReactPaginate from "react-paginate";
 
 function Seyahatlarim() {
@@ -49,7 +48,6 @@ function Seyahatlarim() {
               geri gel
             </Link>
           </div>
-
           <div
             className="border rounded p-2"
             style={{

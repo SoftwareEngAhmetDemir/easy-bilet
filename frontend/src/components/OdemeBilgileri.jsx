@@ -22,6 +22,8 @@ function OdemeBilgileri({ control }) {
             control={control}
             name={"kartNum"}
             placeholder="kartNum"
+            type="text"
+           format="****-****-****-****" mask="....-....-....-...."
           />
         </div>
         <div className="col-lg-6 col-12 pt-2 px-2">
@@ -33,6 +35,7 @@ function OdemeBilgileri({ control }) {
             control={control}
             name={"sonKullanma"}
             placeholder="sonKullanma"
+            format="**/**" mask="../.."
           />
         </div>
         <div className="col-lg-6 col-12 pt-2 px-2">
@@ -40,7 +43,7 @@ function OdemeBilgileri({ control }) {
             forhtml="exampleFormControlInput2"
             className="form-label p-0"
           ></label>
-          <EeasyBiletInput control={control} name={"cvv2"} placeholder="cvv2" />
+          <EeasyBiletInput control={control} format="***" mask="..." name={"cvv2"} placeholder="cvv2" type="text"/>
         </div>
       </div>
       <div className="d-flex justify-content-center mt-5">

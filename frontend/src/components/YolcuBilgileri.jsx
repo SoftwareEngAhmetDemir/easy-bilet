@@ -28,7 +28,14 @@ function YolcuBilgileri({ control }) {
           <label forhtml="exampleFormControlInput2" className="form-label p-0">
             Tc
           </label>
-          <EeasyBiletInput control={control} name={"tc"} placeholder="tc" />
+          <EeasyBiletInput
+            format="************"
+            mask="-----------"
+            control={control}
+            name={"tc"}
+            type="text"
+            placeholder="tc"
+          />
         </div>
       </div>
     </div>
