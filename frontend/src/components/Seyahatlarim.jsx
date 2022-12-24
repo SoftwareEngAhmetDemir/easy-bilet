@@ -17,7 +17,6 @@ function Seyahatlarim() {
       .post("/seyahatlarim", { email: auth.email, start: start, end: end })
       .then(({ data }) => {
         let { records, msg, maxRecordNumbers } = data;
-        console.log(records[0].ad);
         let numberOfButtons = maxRecordNumbers / end;
         setMax(numberOfButtons);
         setResults(records);
