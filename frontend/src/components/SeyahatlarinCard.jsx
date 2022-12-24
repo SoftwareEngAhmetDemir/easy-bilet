@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 function SeyahatlarinCard({data}) {
   // console.log(detaylar)
-  console.log(data)
+  // console.log(data)
   let date = new Date(data.tarih);
   const year = date.getFullYear() 
   const month = (date.getMonth() + 1) 

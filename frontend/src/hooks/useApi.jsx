@@ -4,6 +4,7 @@ function useApi(api,body) {
     const [results,setResults] = useState([]);
   useEffect( () => {
      axios.post(api,body).then(({data}) => {
+      console.log(data.data)
         if(data.msg===200)
         setResults(data.results);
        
