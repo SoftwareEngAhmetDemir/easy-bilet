@@ -6,11 +6,14 @@ import EeasyBiletInput from "./EeasyBiletInput";
 import { Security } from "../Authentication/context";
 import { getCookie, setCookie } from "..";
 // import { AppContext } from "../Authentication/context";
-
+import ReCAPTCHA from "react-google-recaptcha";
 function Login() {
-  const [auth,setAuth]  = useContext(Security);
+  function onChange(value) {
+    console.log("Captcha value:", value);
+  }
+  const [auth, setAuth] = useContext(Security);
   const navigate = useNavigate();
-  
+  const recaptchaRef = React.createRef();
   const {
     control,
     handleSubmit,
@@ -22,31 +25,32 @@ function Login() {
     },
   });
   useEffect(() => {
-    console.log("alo")
+    console.log("alo");
     let token = getCookie("token");
-    if(token.length<0) return;
+    if (token.length < 0) return;
 
-    axios.post(
-      "/decode",
-      {
-        token: token,
-      },
-      {}).then(({data})=>{
-       
-        let {msg,decoded} = data;
-        if(msg === 200){
+    axios
+      .post(
+        "/decode",
+        {
+          token: token,
+        },
+        {}
+      )
+      .then(({ data }) => {
+        let { msg, decoded } = data;
+        if (msg === 200) {
           setAuth({
             email: decoded.email,
             username: decoded.ad,
             token: token,
-            authunticated: true
-          })
+            authunticated: true,
+          });
           // if(window.location.pathname==="/login")
           navigate("/biletal");
         }
-      })
-      return ()=>{
-      }
+      });
+    return () => {};
   }, []);
   const onSubmit = (Fdata) => {
     let axiosConfig = {
@@ -55,7 +59,12 @@ function Login() {
         "Access-Control-Allow-Origin": "*",
       },
     };
-
+    const recaptchaValue = recaptchaRef.current.getValue();
+    // console.log(recaptchaValue);
+    if (recaptchaValue.length === 0) {
+      window.alert("recaptcha is Required !!!");
+      return;
+    }
     axios
       .post(
         "/login",
@@ -65,16 +74,16 @@ function Login() {
         },
         axiosConfig
       )
-      .then(({ data ,...res}) => {
+      .then(({ data, ...res }) => {
         let { msg } = data;
         if (msg === 200) {
           setAuth({
             email: Fdata.email,
             username: res.headers.username,
             token: res.headers.token,
-            authunticated: true
-          })
-          
+            authunticated: true,
+          });
+
           navigate("/biletal");
         } else {
           window.alert("Şifre Veya Kullanıcı adı yanlıştır");
@@ -130,6 +139,16 @@ function Login() {
           </div>
         </div>
         <div className="row"></div>
+
+        <div className="my-3 p-0 col-lg-5 col-8 d-lg-block d-flex justify-content-center form-group">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            required
+            sitekey="6LfKURIUAAAAAO50vlwWZkyK_G2ywqE52NU7YO0S"
+            onChange={onChange}
+          />
+        </div>
+        <div className="row"></div>
         <div className="p-0 col-lg-5 col-8 d-lg-block d-flex justify-content-center">
           <button className="py-2 px-5 btn btn-primary">Giriş Yap</button>
         </div>
@@ -156,7 +175,6 @@ function Login() {
           </div>
         </div>
       </div>
-     
     </div>
   );
 }
