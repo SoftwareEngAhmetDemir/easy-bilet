@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { getCookie } from "..";
+import { getCookie, setCookie } from "..";
 import { AppContext, Security } from "../Authentication/context";
 import Auth from "../components/Auth";
 import BiletAl from "../components/BiletAl";
@@ -12,13 +12,16 @@ import Odeme from "../components/Odeme";
 import SeferSec from "../components/SeferSec";
 import Seyahatlarim from "../components/Seyahatlarim";
 import axios from "axios";
+import { connect } from "react-redux";
 function Croutes() {
   const [auth,setAuth]  = useContext(Security);
   const navigate = useNavigate();
-  
 
   useEffect(() => {
-    console.log("works")
+   
+  
+
+
     let token = getCookie("token");
     if(token.length<0) return;
 
@@ -41,6 +44,7 @@ function Croutes() {
           // navigate("/biletal");
         }
       })
+
   }, []);
   return (
     <Routes>
@@ -56,7 +60,7 @@ function Croutes() {
             </Route>
           </Route>
       </Route>
-      <Route path="/seyahatlarim" element={<Seyahatlarim auth={auth}/>}></Route>
+      <Route path="/seyahatlarim" element={<Seyahatlarim/> } auth={auth}></Route>
     </>
      : <Route path="*" element={<Auth />} />} 
      
@@ -66,5 +70,5 @@ function Croutes() {
     </Routes>
   );
 }
-
 export default Croutes;
+// export default Croutes;

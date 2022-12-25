@@ -72,14 +72,14 @@ if(token.length>0){
 let rootE = document.getElementById("root");
 const root = ReactDOM.createRoot(rootE);
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
     
    
       <App />
       {/* <Footer /> */}
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

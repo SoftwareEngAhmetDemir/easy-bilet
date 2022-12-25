@@ -1,46 +1,6 @@
 @import "./bootstrap/scss/bootstrap";
 @import "./icons";
-#header {
- 
 
-    color: $white;
-    box-sizing: border-box;
-    a{
-      color: $white;
-    }
-   .head-1{
-   
-    background-color: $red;
-   }
-   .head-2{
-    background-color: #F6F7F8;
-    a{
-      color: $danger;
-    }
-   }
-    .head-1{
-      padding: 22px 0;
-      // height: 80px !important;
-    }
-    ul.bread-crumb {
-     
-      font-size: 1.125em;
-      li {
-        padding: 0 10px;
-        &:not(:last-child)::after {
-          content: "";
-          height: 200px;
-          width: 1px;
-          margin-left: 20px;
-          border-right: 1px solid $white;
-        }
-      }
-    }
-    ul.second-header{
-      background-color: #F6F7F8;
-  
-    }
-  }
   @include media-breakpoint-down(lg){
       #header {
       
@@ -53,4 +13,22 @@ $footer-height:125px;
     // min-height: 100vh;
     min-height: calc(100vh - ($footer-height + $header-height + $margin-bottom-footer));
    margin-bottom: 23px;
+}
+
+
+.loading-icon{
+ transition: all 4s ease-in-out;
+ background-color: white;
+ width: 100vw;
+ height: 500px;
+ animation-duration: 4s;
+ animation-fill-mode: both;
+}
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.fadeOut {
+  animation-name: fadeOut;
 }

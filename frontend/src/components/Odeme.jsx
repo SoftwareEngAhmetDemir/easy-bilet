@@ -71,7 +71,7 @@ function Odeme() {
 
   return (
     <div>
-      <div className={`sucess ${sucessv===true?"d-flex":"d-none"}`}>
+      <div className={`sucess ${sucessv===true?"d-flex":"d-none"}`} style={{zIndex:'999',position:'relative'}}>
         <img width="400px" src={sucessImg} />
       </div>
       <form className={`row ${sucessv===false?"d-flex":"d-none"}`} onSubmit={handleSubmit(onSubmit)}>

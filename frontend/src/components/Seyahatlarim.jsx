@@ -4,26 +4,32 @@ import { Security } from "../Authentication/context";
 import SeyahatlarinCard from "./SeyahatlarinCard";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
-
+import Layout from "../Layout";
+import loadingImg from "../assets/loading.gif";
 function Seyahatlarim() {
+  const [loading,setLoading] = useState(false);
   const [auth, setAuth] = useContext(Security);
   const [results, setResults] = useState([]);
   const [start, SetStart] = useState(0);
   const [numberOfBtns, setNumberOfBtns] = useState(0);
   let end = 5;
-  const get_data = async () => {
-    await axios
+  const get_data =  () => {
+    setLoading(true);
+     axios
       .post("/seyahatlarim", { email: auth.email, start: start, end: end })
       .then(({ data }) => {
         let { records, msg, maxRecordNumbers } = data;
         let numberOfButtons = maxRecordNumbers / end;
         setNumberOfBtns(numberOfButtons);
         setResults(records);
+       setTimeout(() => {
+        setLoading(false);
+       }, 3000);
       });
   };
   useEffect(() => {
   
-      get_data();
+    get_data();
     return ()=>{
       console.log('finished')
     }
@@ -33,11 +39,12 @@ function Seyahatlarim() {
   };
   return (
     <div>
+      
       <div className="mb-3">
         <h2>Seyahatlarim</h2>
       </div>
 
-      {results ? (
+      {loading === false ? (
         <div>
           <div className="mb-3 p-0">
             <Link
@@ -68,7 +75,23 @@ function Seyahatlarim() {
                 ))}
               </div>
             </div>
-            <div>
+            
+          </div>
+        </div>
+      ) : (
+        <div>  <div
+        className="d-flex justify-content-center loading-icon fadeOut"
+        id="loading"
+      >
+        <img
+          className="d-block"
+          width="100px"
+          height="100px"
+          src={loadingImg}
+        />
+      </div></div>
+      )}
+      <div>
               <ReactPaginate
                 className="mt-3"
                 breakLabel="..."
@@ -80,13 +103,8 @@ function Seyahatlarim() {
                 renderOnZeroPageCount={null}
               />
             </div>
-          </div>
-        </div>
-      ) : (
-        <div>Loading</div>
-      )}
     </div>
   );
 }
-
+// Seyahatlarim = Layout(Seyahatlarim);  
 export default Seyahatlarim;

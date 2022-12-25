@@ -7,6 +7,7 @@
     "@emotion/styled": "11.10.5",
     "@mui/material": "5.10.16",
     "@mui/x-date-pickers": "5.0.9",
+    "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -21,8 +22,10 @@
     "react-hook-form": "^7.40.0",
     "react-input-mask": "^2.0.4",
     "react-paginate": "^8.1.4",
+    "react-redux": "5.0.6",
     "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
+    "redux": "3.7.2",
     "sass": "^1.56.1",
     "sort-by": "^1.2.0",
     "use-mask-input": "^3.0.0",
@@ -53,6 +56,7 @@
     ]
   },
   "devDependencies": {
-    "@types/jest": "^29.2.3"
+    "@types/jest": "^29.2.3",
+    "redux-devtools": "^3.7.0"
   }
 }
