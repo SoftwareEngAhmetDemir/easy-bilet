@@ -10,7 +10,7 @@ function SeferSec() {
   console.log(location.state);
   let seyahatlar = location.state.seyahatlar;
   return (
-    <div >
+    <div className="fadeIn">
       <div className="mb-3 p-0">
         <Link to={'../'} style={{ width: "161px" }} className="btn btn-danger">
           geri gel

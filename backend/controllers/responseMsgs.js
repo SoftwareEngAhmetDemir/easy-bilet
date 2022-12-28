@@ -5,5 +5,6 @@ export let msg={
     Unauthorized : 401,
     LoginFaild: 401,
     ThereIsNoRecords: 404,
-    NoToken: 405
+    NoToken: 405,
+    JwtExpired: 406
 }

@@ -10,6 +10,7 @@ import odeme from '../controllers/odeme';
 import logout from '../controllers/logout';
 import decode from '../controllers/decode';
 import seyahatlarim from '../controllers/seyahatlarim';
+import refreshToken from '../controllers/refreshToken';
 
 router.use('/yeniKayit', yeniKayit)
 router.use('/login', login)
@@ -20,4 +21,6 @@ router.use('/odeme',odeme)
 router.use('/decode',decode)
 
 router.use('/seyahatlarim',seyahatlarim)
+
+router.use('/refreshToken',refreshToken)
 module.exports = router

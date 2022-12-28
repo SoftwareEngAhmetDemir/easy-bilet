@@ -9,6 +9,7 @@ function Header() {
     console.log("logout")
     window.location.href= "/login";
     setCookie("token","",0);
+    sessionStorage.removeItem("loginTime")
   }
   return (
     <header id="header">

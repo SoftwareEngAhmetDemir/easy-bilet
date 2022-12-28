@@ -41,7 +41,7 @@ function KoltukSec() {
   }
   // dataSeats.map((e, index) => console.log(e));
   return (
-    <div className="koltukSec container">
+    <div className="koltukSec container fadeIn">
       <div className="row align-items-center border p-lg-5 p-3">
         {dataSeats.map((e, index) => {
           return (

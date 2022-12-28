@@ -23,6 +23,10 @@ app.use(
 );
 const routing = require("./routes/index.js");
 app.use(cors());
+
+function RenewToken(ad,email){
+ 
+}
 app.post("/*", (req, res, next) => {
   // res.append('namebackend', 'ahmed demir');
   res.set("Access-Control-Expose-Headers", "*");
@@ -31,7 +35,8 @@ app.post("/*", (req, res, next) => {
     req.url === "/" ||
     req.url === "/login" ||
     req.url === "/yenikayit" ||
-    req.url === "/logout" || req.url === "/decode"
+    req.url === "/logout" || req.url === "/decode" 
+    
   ){
 
     return next();

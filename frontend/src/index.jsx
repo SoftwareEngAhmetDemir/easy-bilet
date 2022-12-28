@@ -33,41 +33,6 @@ export function getCookie(cname) {
   return "";
 }
 
- axios.interceptors.response.use(
-  function (response) {
-    let token = getCookie("token");
-    if (response.headers.token !== undefined) {
-      axios.defaults.headers.common["token"] = response.headers.token;
-      setCookie("token", response.headers.token, 1);
-    }
-    if ((response.url !== "/login" || response.url !== "/Member") && token.length === 0) {
-      response.headers.token = token;
-    }
-    if (response.data.msg === 401) {
-      window.location.href = "/login";
-    }
-// response.headers.toki = "ahmed"
-    return response;
-  },
-  function (error) {
-    return Promise.reject(error);
-  }
-);
-axios.interceptors.request.use((req) => {
-  console.log(req.url);
-  let token = getCookie("token");
-if(token.length>0){
-  axios.defaults.headers.common["token"] = token;
-}
-
-  if ((req.url !== "/login" || req.url !== "/Member") && token.length === 0) {
-    req.headers.token = token;
-  }
-  if (req.data.msg === 401) {
-    window.location.href = "/login";
-  }
-  return req;
-});
 
 let rootE = document.getElementById("root");
 const root = ReactDOM.createRoot(rootE);

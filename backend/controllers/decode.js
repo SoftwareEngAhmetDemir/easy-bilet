@@ -9,13 +9,19 @@ const uri =
 mongoose.connect(uri);
 
 api.post("/", (req, res) => {
-    console.log(req.body.token)
+  console.log(req.body.token);
   jwt.verify(req.body.token, "my secret word", function (err, decoded) {
     // res.setHeader
-    if (err) return res.json({ msg: msg.NoToken });
-    else return res.json({ msg: 200, decoded: decoded });
+    if (err) {
+      console.log("error");
+      if (err.message === "jwt expired") {
+        return res.json({
+          msg: msg.JwtExpired,
+        });
+      }
+      return res.json({ msg: msg.NoToken });
+    } else return res.json({ msg: 200, decoded: decoded });
   });
 });
-
 
 export default api;

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
@@ -7,11 +7,13 @@ import { Security } from "../Authentication/context";
 import { getCookie, setCookie } from "..";
 // import { AppContext } from "../Authentication/context";
 import ReCAPTCHA from "react-google-recaptcha";
+import { Timers } from "../Authentication/timers";
 function Login() {
   function onChange(value) {
     console.log("Captcha value:", value);
   }
   const [auth, setAuth] = useContext(Security);
+  const [loginTime, SetLoginTime] = useContext(Timers);
   const navigate = useNavigate();
   const recaptchaRef = React.createRef();
   const {
@@ -25,7 +27,7 @@ function Login() {
     },
   });
   useEffect(() => {
-    console.log("alo");
+   
     let token = getCookie("token");
     if (token.length < 0) return;
 
@@ -39,13 +41,17 @@ function Login() {
       )
       .then(({ data }) => {
         let { msg, decoded } = data;
+       
         if (msg === 200) {
-          setAuth({
-            email: decoded.email,
-            username: decoded.ad,
-            token: token,
-            authunticated: true,
+          setAuth((prev) => {
+            return {
+              email: decoded.email,
+              username: decoded.ad,
+              token: token,
+              authunticated: true,
+            };
           });
+
           // if(window.location.pathname==="/login")
           navigate("/biletal");
         }
@@ -77,13 +83,15 @@ function Login() {
       .then(({ data, ...res }) => {
         let { msg } = data;
         if (msg === 200) {
-          setAuth({
-            email: Fdata.email,
-            username: res.headers.username,
-            token: res.headers.token,
-            authunticated: true,
+          setAuth((prev) => {
+            return {
+              email: Fdata.email,
+              username: res.headers.username,
+              token: res.headers.token,
+              authunticated: true,
+            };
           });
-
+         sessionStorage.setItem("loginTime",new Date())
           navigate("/biletal");
         } else {
           window.alert("Şifre Veya Kullanıcı adı yanlıştır");

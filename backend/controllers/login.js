@@ -21,10 +21,10 @@ api.post("/",  async(req, res) => {
    bcrypt.compare(req.body.parola, user.parola, function (err, result) {
      if (err) return res.json({ msg: msg.error });
      if (result === true) {
-      let {ad,soyad,email} = user._doc
+      let {ad,email} = user._doc
        let token =   jwt.sign(
          {
-           ad,soyad,email
+           ad,email
           },
           "my secret word",
           { expiresIn: '1h' }

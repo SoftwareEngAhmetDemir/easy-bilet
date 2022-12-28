@@ -14,56 +14,59 @@ import Seyahatlarim from "../components/Seyahatlarim";
 import axios from "axios";
 import { connect } from "react-redux";
 function Croutes() {
-  const [auth,setAuth]  = useContext(Security);
+  const [auth, setAuth] = useContext(Security);
   const navigate = useNavigate();
 
   useEffect(() => {
-   
-  
-
-
     let token = getCookie("token");
-    if(token.length<0) return;
+    if (token.length < 0) return;
 
-    axios.post(
-      "/decode",
-      {
-        token: token,
-      },
-      {}).then(({data})=>{
-       
-        let {msg,decoded} = data;
-        if(msg === 200){
+    axios
+      .post(
+        "/decode",
+        {
+          token: token,
+        },
+        {}
+      )
+      .then(({ data }) => {
+        let { msg, decoded } = data;
+        if (msg === 200) {
           setAuth({
             email: decoded.email,
             username: decoded.ad,
             token: token,
-            authunticated: true
-          })
-         
+            authunticated: true,
+          });
+
           // navigate("/biletal");
         }
-      })
-
+      });
   }, []);
   return (
     <Routes>
-    { auth.authunticated===true? 
-    <>
-    <Route path="/biletal">
-        <Route index element={<BiletAl />}/>
-        <Route path="sefersec">
-          <Route index element={<SeferSec />}/>
-          <Route path="koltuksec" >
-            <Route index element={<KoltukSec />}/>
-            <Route path="odeme" element={<Odeme/>}/>
+      {auth.authunticated === true ? (
+        <>
+          <Route path="/biletal">
+            <Route index element={<BiletAl />} />
+            <Route path="sefersec">
+              <Route index element={<SeferSec />} />
+              <Route path="koltuksec">
+                <Route index element={<KoltukSec />} />
+                <Route path="odeme" element={<Odeme />} />
+              </Route>
             </Route>
           </Route>
-      </Route>
-      <Route path="/seyahatlarim" element={<Seyahatlarim/> } auth={auth}></Route>
-    </>
-     : <Route path="*" element={<Auth />} />} 
-     
+          <Route
+            path="/seyahatlarim"
+            element={<Seyahatlarim />}
+            auth={auth}
+          ></Route>
+        </>
+      ) : (
+        <Route path="*" element={<Auth />} />
+      )}
+
       <Route path="/Member" element={<Member />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="*" element={<ErrorPage />} />

@@ -51,10 +51,11 @@ ul[role="navigation"] {
   }
 
   li {
-   &:not(.previous,.next){
-    width: 35px;
-    height: 35px;
-   }
+    &:not(.previous, .next) {
+      width: 35px;
+      height: 35px;
+    }
+
     margin-right: 10px;
     display: flex;
     align-items: center;
@@ -79,4 +80,22 @@ ul[role="navigation"] {
     filter: drop-shadow(0px 0px 5px #0d6dfd9c);
     font-weight: 500;
   }
+}
+
+li.previous.disabled,
+li.next.disabled {
+  a{
+    color: $gray-600;
+  }
+}
+
+.fadeIn{
+  animation-name: fade;
+  animation-duration: 1s;
+}
+
+
+@keyframes fade {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
