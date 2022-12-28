@@ -60,7 +60,7 @@ function Seyahatlarim() {
           </Link>
         </div>
         <div
-          className="border rounded p-2"
+          className="border rounded p-0"
           style={{
             display: "flex",
             flexDirection: "column",
