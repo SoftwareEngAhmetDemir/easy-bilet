@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect, useMemo } from "react";
+import React, { memo, useContext, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Controller, useForm } from "react-hook-form";
@@ -99,6 +99,7 @@ function Login() {
       })
       .catch((err) => err);
   };
+  const[shown,setShown] = useState(false);
   return (
     <div className="login row justify-content-center fadeIn">
       <form
@@ -137,12 +138,18 @@ function Login() {
             className="d-flex form-control py-0 inp-c"
           >
             {/* <img width="25px" src="./assets/lock.svg" /> */}
-            <i className="icon-lock"></i>
+            <i className="icon-lock" onClick={(e)=>{
+              setShown(!shown)
+              if(!shown)
+              e.currentTarget.style.color = "red"
+              else e.currentTarget.style.color =""
+            }}></i>
 
             <EeasyBiletInput
               control={control}
               name={"parola"}
               placeholder="parola"
+              type={shown?"text":"password"}
             />
           </div>
         </div>
