@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const { mongo_uri } = require('./security');
+import mongoose from 'mongoose';
+import { mongo_uri } from './security';
 mongoose.connect(mongo_uri);
 module.exports = mongoose;
 

@@ -1,10 +1,10 @@
-const express = require("express");
-const api = express.Router();
+
+import { Router } from "express";
 import yeniKayit from "../models/yeniKayit";
 import { msg } from "./responseMsgs";
 import mongoose from "./connect";
 import { SALT_ROUNDS } from "./security";
-
+const api = Router();
 const kayitModel = mongoose.model("yeniKayit", yeniKayit);
 const bcrypt = require("bcrypt");
 const saltRounds = parseInt(SALT_ROUNDS);
