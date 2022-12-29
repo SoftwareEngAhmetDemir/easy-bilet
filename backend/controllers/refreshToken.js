@@ -1,5 +1,6 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
+import { SECRET_KEY } from "./security";
 const api = Router();
 api.post("/", (req, res) => {
   let {ad,email} = req.body;
@@ -8,7 +9,7 @@ api.post("/", (req, res) => {
       ad,
       email,
     },
-    "my secret word",
+    SECRET_KEY,
     { expiresIn: "1h" }
   );
   res.setHeader("token",token);

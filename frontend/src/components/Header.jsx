@@ -1,9 +1,15 @@
 import React, { useContext } from "react";
-import {  NavLink } from "react-router-dom";
+import {  Link, NavLink } from "react-router-dom";
 import { setCookie } from "..";
 import { Security } from "../Authentication/context";
 
 function Header() {
+ 
+  //  if(true){
+  //    throw new Error('Crashed!!!!');
+  //  }
+ 
+
   const [auth,setAuth]  = useContext(Security);
   const logout=()=>{
     console.log("logout")
@@ -15,7 +21,7 @@ function Header() {
     <header id="header">
       <div className=" head-1">
        <div className="d-flex justify-content-sm-between justify-content-center h-100 container flex-wrap">
-        <h1>EasyBilet.com</h1>
+        <Link to={"/"}><h1>EasyBilet.com</h1></Link>
         <ul className="d-flex h-100 list-unstyled bread-crumb align-items-center">
           <li>
            {!auth.authunticated? <NavLink to={"login"}>Üye Giriş</NavLink>:<span >{auth.username}</span>}

@@ -60,12 +60,9 @@ function EeasyBiletInput({ name, control, placeholder,type,format,mask,pattern }
         {...field}
         type = {type || "text"}
         pattern = {pattern || null}
-          // type="text"
           className="form-control form-control-inp border-0"
           style={{ outline: "none" }}
-          // id="exampleFormControlInput2"
           placeholder={placeholder}
-          // data-format={format || null} data-mask={mask|| null}
         />
       )}
     />

@@ -1,23 +1,16 @@
-import React, {
-  createContext,
-  memo,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useState } from "react";
 import { Security } from "./Authentication/context";
 import Croutes from "./routes/Crouters";
 import axios from "axios";
 import { getCookie, setCookie } from ".";
-import { useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import loadingImg from "./assets/loading.gif";
 import { Timers } from "./Authentication/timers";
+import ErrorBoundary from "./components/ErrorBoundary.jsx";
 function App() {
   const [loading, setLoading] = useState(false);
   function getMinutesDiff(startDate, endDate) {
-    const msInMinutes = 60* 1000;
+    const msInMinutes = 60 * 1000;
 
     return Math.floor((endDate - startDate) / msInMinutes);
   }
@@ -62,15 +55,14 @@ function App() {
       let LoginTime = new Date(sessionStorage.getItem("loginTime").toString());
       let currentTime = new Date();
       let diffM = getMinutesDiff(LoginTime, currentTime);
-      console.log(diffM);
+
       if (diffM >= 54) {
-        
         document.addEventListener("click", function () {
           let { username, email } = auth;
-      
+
           sessionStorage.setItem("loginTime", new Date());
 
-          fetch("http://localhost:8090/refreshToken", {
+          fetch(process.env.REACT_APP_BASE_URL + "/refreshToken", {
             method: "POST",
             body: JSON.stringify({
               ad: username,
@@ -95,21 +87,6 @@ function App() {
       }
     }
 
-    //
-    // console.log(LoginTime);
-    // if (diffM <= 61) {
-    //   document.addEventListener("click", function () {
-    //     sessionStorage.setItem("loginTime", new Date());
-    //     axios.post("/refreshToken").then((data) => {
-    //       axios.defaults.headers.common["token"] = req.headers.token;
-    //       setCookie("token", req.headers.token, 1);
-    //     });
-    //   });
-    // }
-    // else if (diffM > 61) {
-    //   logout();
-    // }
-    // console.log(currentTime);
     if ((req.url !== "/login" || req.url !== "/Member") && token.length === 0) {
       req.headers.token = token;
     }
@@ -119,7 +96,6 @@ function App() {
     return req;
   });
 
-  useEffect(() => {}, []);
   const [auth, setAuth] = useState({
     email: "",
     username: "",
@@ -127,37 +103,34 @@ function App() {
     authunticated: false,
   });
   const [loginTime, SetLoginTime] = useState(null);
-  let axiosConfig = {
-    headers: {
-      "Content-Type": "application/json;charset=UTF-8",
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
 
+ 
   return (
     <div className="App">
-      <Security.Provider value={[auth, setAuth]}>
-        <Header />
-        <div className="container">
-          {loading === true ? (
-            <div
-              className="d-flex justify-content-center loading-icon fadeOut"
-              id="loading"
-            >
-              <img
-                className="d-block"
-                width="100px"
-                height="100px"
-                src={loadingImg}
-              />
-            </div>
-          ) : (
-            <Timers.Provider value={[loginTime, SetLoginTime]}>
-              <Croutes />
-            </Timers.Provider>
-          )}
-        </div>
-      </Security.Provider>
+        <Security.Provider value={[auth, setAuth]}>
+      <ErrorBoundary>
+          <Header />
+          <div className="container">
+            {loading === true ? (
+              <div
+                className="d-flex justify-content-center loading-icon fadeOut"
+                id="loading"
+              >
+                <img
+                  className="d-block"
+                  width="100px"
+                  height="100px"
+                  src={loadingImg}
+                />
+              </div>
+            ) : (
+              <Timers.Provider value={[loginTime, SetLoginTime]}>
+                <Croutes />
+              </Timers.Provider>
+            )}
+          </div>
+      </ErrorBoundary>
+        </Security.Provider>
     </div>
   );
 }

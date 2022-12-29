@@ -1,12 +1,10 @@
 import {Router} from 'express';
 
 const api = Router();
-import mongoose from "mongoose";
 import seyahatlar from "../models/seyahatlar";
 import { msg } from "./responseMsgs";
-const uri =
-  "mongodb+srv://nour:nour@cluster0.bhwsyqn.mongodb.net/?retryWrites=true&w=majority";
-mongoose.connect(uri);
+import mongoose from './connect';
+
 const seyahatlarModel = mongoose.model("seyahatlar", seyahatlar);
 
 api.post("/", (req, res) => {

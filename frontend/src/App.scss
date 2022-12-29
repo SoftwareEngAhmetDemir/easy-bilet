@@ -1,11 +1,5 @@
-@import "./bootstrap/scss/bootstrap";
 @import "./icons";
 
-  @include media-breakpoint-down(lg){
-      #header {
-      
-      }
-  }
 $header-height: 200px;
 $margin-bottom-footer: 35px;
 $footer-height:125px;
@@ -32,3 +26,4 @@ $footer-height:125px;
 .fadeOut {
   animation-name: fadeOut;
 }
+

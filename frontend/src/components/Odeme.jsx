@@ -31,9 +31,6 @@ function Odeme() {
   });
   console.log(from, to);
   const onSubmit = (data) => {
-    console.log(data);
-  // data.cep =   data.cep.replace(/\.|\(|\-)/gi, "");
-  // console.log(data.cep);
     let req1 = axios.post("/odeme", {
       ...data,
       fromTo: `${from}-${to}`,
@@ -71,10 +68,16 @@ function Odeme() {
 
   return (
     <div>
-      <div className={`sucess ${sucessv===true?"d-flex":"d-none"}`} style={{zIndex:'999',position:'relative'}}>
+      <div
+        className={`sucess ${sucessv === true ? "d-flex" : "d-none"}`}
+        style={{ zIndex: "999", position: "relative" }}
+      >
         <img width="400px" src={sucessImg} />
       </div>
-      <form className={`row ${sucessv===false?"d-flex":"d-none"}`} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={`row ${sucessv === false ? "d-flex" : "d-none"}`}
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <div className="col-lg-4 col-12">
           <SeferBilgileri data={Data} koltukNo={location.state.koltukNo} />
         </div>

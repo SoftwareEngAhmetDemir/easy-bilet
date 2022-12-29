@@ -4,24 +4,20 @@ import { Security } from "../Authentication/context";
 import SeferCard from "./SeferCard";
 
 function SeferSec() {
-  // const [auth,setAuth]  = useContext(Security);
-  // console.log(auth)
   const location = useLocation();
-  console.log(location.state);
   let seyahatlar = location.state.seyahatlar;
   return (
     <div className="fadeIn">
       <div className="mb-3 p-0">
-        <Link to={'../'} style={{ width: "161px" }} className="btn btn-danger">
+        <Link to={"../"} style={{ width: "161px" }} className="btn btn-danger">
           geri gel
         </Link>
       </div>
-   
-        {
-            seyahatlar.map(e=> <div key={e._id} className="container mt-3"><SeferCard detaylar={e}/></div>)
-        }
-     
-    
+      {seyahatlar.map((e) => (
+        <div key={e._id} className="container mt-3">
+          <SeferCard detaylar={e} />
+        </div>
+      ))}
     </div>
   );
 }

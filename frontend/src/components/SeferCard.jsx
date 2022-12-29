@@ -1,14 +1,11 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-function SeferCard({detaylar}) {
-  // console.log(detaylar)
-  console.log(detaylar)
+function SeferCard({ detaylar }) {
   const navigate = useNavigate();
-  const koltukAl = ()=>{
-    // to={"koltuksec"}
-    navigate("koltuksec",{state:{data:detaylar}});
-  }
+  const koltukAl = () => {
+    navigate("koltuksec", { state: { data: detaylar } });
+  };
   return (
     <div className="row justify-content-center border p-3 rounded align-items-center">
       <div className="col-3">{detaylar.otobusFirmasi}</div>

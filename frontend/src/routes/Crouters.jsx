@@ -13,6 +13,7 @@ import SeferSec from "../components/SeferSec";
 import Seyahatlarim from "../components/Seyahatlarim";
 import axios from "axios";
 import { connect } from "react-redux";
+import Hello from "../components/Hello";
 function Croutes() {
   const [auth, setAuth] = useContext(Security);
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ function Croutes() {
       ) : (
         <Route path="*" element={<Auth />} />
       )}
-
+      <Route path="/" element={<Hello />}></Route>
       <Route path="/Member" element={<Member />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="*" element={<ErrorPage />} />

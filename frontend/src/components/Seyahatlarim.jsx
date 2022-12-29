@@ -25,22 +25,16 @@ function Seyahatlarim() {
         setTimeout(() => {
           setLoading(false);
         }, 700);
-      
       });
   };
   useEffect(() => {
     get_data();
-    return () => {
-      console.log("finished");
-    };
+    return () => {};
   }, [start]);
   const handlePageClick = (event) => {
-    console.log(event.selected,Math.floor( numberOfBtns));
-    if(event.selected ===Math.floor( numberOfBtns))
-    {
-      document.querySelector("li.next").classList.add("disabled")
-    }
-    else document.querySelector("li.next").classList.remove("disabled")
+    if (event.selected === Math.floor(numberOfBtns)) {
+      document.querySelector("li.next").classList.add("disabled");
+    } else document.querySelector("li.next").classList.remove("disabled");
     SetStart(event.selected);
   };
   return (
@@ -65,7 +59,7 @@ function Seyahatlarim() {
             display: "flex",
             flexDirection: "column",
             height: "500px",
-            alignItems:"center"
+            alignItems: "center",
           }}
         >
           {loading === true ? (
@@ -75,15 +69,12 @@ function Seyahatlarim() {
                 className="d-flex justify-content-center align-items-center loading-icon fadeOut"
                 id="loading"
               >
-                <img
-                  width="100px"
-                  height="100px"
-                  src={loadingImg}
-                />
+                <img width="100px" height="100px" src={loadingImg} />
               </div>
             </div>
           ) : (
-            <div id="show-c"
+            <div
+              id="show-c"
               style={{ height: "480px", overflowY: "auto", direction: "rtl" }}
               className="p-2 w-100 fadeIn"
             >
@@ -106,7 +97,7 @@ function Seyahatlarim() {
           nextLabel="next >"
           onPageChange={handlePageClick}
           pageRangeDisplayed={5}
-          pageCount={numberOfBtns>12?12:numberOfBtns}
+          pageCount={numberOfBtns > 12 ? 12 : numberOfBtns}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
         />
@@ -114,5 +105,4 @@ function Seyahatlarim() {
     </div>
   );
 }
-// Seyahatlarim = Layout(Seyahatlarim);
 export default Seyahatlarim;

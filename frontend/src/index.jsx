@@ -1,20 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 import "./bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
 import App from "./App";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8090";
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 export function setCookie(cName, cValue, expHours) {
   let date = new Date();
-  date.setTime(date.getTime() + expHours * 60*60 * 1000); // 1 hour
+  date.setTime(date.getTime() + expHours * 60 * 60 * 1000); // 1 hour
   const expires = "expires=" + date.toUTCString();
   document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
 }
@@ -33,17 +31,14 @@ export function getCookie(cname) {
   return "";
 }
 
-
 let rootE = document.getElementById("root");
 const root = ReactDOM.createRoot(rootE);
 root.render(
   // <React.StrictMode>
-    <BrowserRouter>
-    
-   
-      <App />
-      {/* <Footer /> */}
-    </BrowserRouter>
+  <BrowserRouter>
+    <App />
+    {/* <Footer /> */}
+  </BrowserRouter>
   // </React.StrictMode>
 );
 

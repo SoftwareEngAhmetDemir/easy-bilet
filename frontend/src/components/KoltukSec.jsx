@@ -8,6 +8,7 @@ function KoltukSec() {
 
   useEffect(() => {
     document.getElementById("odeme").disabled = true;
+    return () => {};
   }, []);
   const getIndex = (indexV) => {
     document.getElementById("odeme").disabled = false;
@@ -49,12 +50,6 @@ function KoltukSec() {
               key={index}
               className={`numbers d-flex justify-content-center align-items-center col-lg-2 col-3`}
             >
-              {/* <img
-                className={`imges ${e.bos ? "d-none" : "d-block"}`}
-                src="/assets/seat.svg"
-                width={"50%"}
-                height="auto"
-              /> */}
               {e === false ? (
                 <i className="icon-seat" style={{ color: "red" }}></i>
               ) : (
@@ -85,8 +80,6 @@ function KoltukSec() {
         <div className="col-6 mt-md-0 mt-2  d-flex justify-content-md-end">
           <button
             id="odeme"
-            // to={"odeme"}
-
             onClick={() => odemefunc()}
             className="btn btn-primary w-25"
             style={{ minWidth: "161px" }}

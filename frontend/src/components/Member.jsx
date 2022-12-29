@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 
@@ -12,11 +12,16 @@ function Member() {
       parola: "",
     },
   });
+  const navigate = useNavigate();
   const onSubmit = (data) => {
-    console.log(data);
-    axios.post('/yenikayit',data).then(data=>{
-    })
-  }
+    axios.post("/yenikayit", data).then(({ data }) => {
+      let { msg } = data;
+      if (msg === 201) {
+        alert("Yeni Hesap Başarıyla oluşturuldu");
+        navigate("/login");
+      }
+    });
+  };
   return (
     <div className="uye-ol row justify-content-center">
       <div className="p-0 col-lg-5 col-8 d-flex justify-content-lg-start justify-content-center">
@@ -51,16 +56,18 @@ function Member() {
             Soyad
           </label>
           <Controller
-        name="soyad"
-        control={control}
-        render={({ field }) => <input {...field}
-        type="text"
-        className="form-control"
-        id="exampleFormControlInput12"
-        placeholder="Soyad"
-      />}
-      />
-          
+            name="soyad"
+            control={control}
+            render={({ field }) => (
+              <input
+                {...field}
+                type="text"
+                className="form-control"
+                id="exampleFormControlInput12"
+                placeholder="Soyad"
+              />
+            )}
+          />
         </div>
         <div className="row"></div>
         <div className="mb-3 p-0 col-lg-5 col-8">
@@ -71,21 +78,21 @@ function Member() {
             style={{ background: "#E8F0FE" }}
             className="d-flex form-control py-0 inp-c"
           >
-            {/* <img width="25px" src="./assets/email.svg" />{" "} */}
             <i className="icon-email"></i>
             <Controller
-        name="email"
-        control={control}
-        render={({ field }) =>
-        <input {...field}
-        type="email"
-        className="form-control form-control-inp border-0"
-        style={{ outline: "none" }}
-        id="exampleFormControlInput22"
-        placeholder="name@example.com"
-      />}
-      />
-            
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="email"
+                  className="form-control form-control-inp border-0"
+                  style={{ outline: "none" }}
+                  id="exampleFormControlInput22"
+                  placeholder="name@example.com"
+                />
+              )}
+            />
           </div>
         </div>
         <div className="row"></div>
@@ -97,21 +104,21 @@ function Member() {
             style={{ background: "#E8F0FE" }}
             className="d-flex form-control py-0 inp-c"
           >
-            {/* <img width="25px" src="./assets/lock.svg" /> */}
             <i className="icon-lock"></i>
             <Controller
-        name="parola"
-        control={control}
-        render={({ field }) => 
-        <input {...field}
-        type="password"
-        className="form-control form-control-inp border-0"
-        style={{ outline: "none" }}
-        id="exampleFormControlInput23"
-        placeholder="name@example.com"
-      />}
-      />
-            
+              name="parola"
+              control={control}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="password"
+                  className="form-control form-control-inp border-0"
+                  style={{ outline: "none" }}
+                  id="exampleFormControlInput23"
+                  placeholder="name@example.com"
+                />
+              )}
+            />
           </div>
         </div>
         <div className="row"></div>
