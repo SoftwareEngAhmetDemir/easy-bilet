@@ -55,8 +55,9 @@ function App() {
       let LoginTime = new Date(sessionStorage.getItem("loginTime").toString());
       let currentTime = new Date();
       let diffM = getMinutesDiff(LoginTime, currentTime);
-
-      if (diffM >= 54) {
+ 
+      if (parseInt(diffM) >= 54) {
+        
         document.addEventListener("click", function () {
           let { username, email } = auth;
 
@@ -80,7 +81,8 @@ function App() {
               axios.defaults.headers.common["token"] = e.msg;
             });
         });
-      } else if (diffM > 59) {
+      } 
+      if (diffM > 59) {
         if (req.url !== "/login" || req.url !== "/Member") {
           logout();
         }
