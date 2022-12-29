@@ -100,7 +100,7 @@ function Login() {
       .catch((err) => err);
   };
   return (
-    <div className="login row justify-content-center">
+    <div className="login row justify-content-center fadeIn">
       <form
         className="row justify-content-center"
         onSubmit={handleSubmit(onSubmit)}

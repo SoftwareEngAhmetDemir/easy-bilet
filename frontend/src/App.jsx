@@ -40,7 +40,8 @@ function App() {
       return response;
     },
     function (error) {
-      return Promise.reject(error);
+      throw new Error(error)
+      // return Promise.reject(error);
     }
   );
   axios.interceptors.request.use((req) => {
@@ -95,8 +96,13 @@ function App() {
     if (req.data?.msg === 401) {
       window.location.href = "/login";
     }
+   
     return req;
-  });
+  },
+  function (error){
+  
+  }
+  );
 
   const [auth, setAuth] = useState({
     email: "",
@@ -110,7 +116,7 @@ function App() {
   return (
     <div className="App">
         <Security.Provider value={[auth, setAuth]}>
-      <ErrorBoundary>
+    
           <Header />
           <div className="container">
             {loading === true ? (
@@ -131,7 +137,7 @@ function App() {
               </Timers.Provider>
             )}
           </div>
-      </ErrorBoundary>
+      
         </Security.Provider>
     </div>
   );

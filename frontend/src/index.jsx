@@ -7,6 +7,7 @@ import "./bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import axios from "axios";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -35,10 +36,12 @@ let rootE = document.getElementById("root");
 const root = ReactDOM.createRoot(rootE);
 root.render(
   // <React.StrictMode>
+  <ErrorBoundary>
   <BrowserRouter>
     <App />
     {/* <Footer /> */}
   </BrowserRouter>
+  </ErrorBoundary>
   // </React.StrictMode>
 );
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Auth() {
   return (
-    <div>Not Authunticated</div>
+    <div>Not Authunticated, Please Login !!!</div>
   )
 }
 

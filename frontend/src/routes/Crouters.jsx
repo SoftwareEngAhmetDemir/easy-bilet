@@ -44,6 +44,12 @@ function Croutes() {
         }
       });
   }, []);
+  if (navigator.onLine) {
+    // alert('online');
+    console.log("internet connection working...");
+  } else {
+    throw new Error("no Enternet Connection!!!");
+  }
   return (
     <Routes>
       {auth.authunticated === true ? (

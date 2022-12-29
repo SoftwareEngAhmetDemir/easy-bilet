@@ -23,7 +23,7 @@ function Member() {
     });
   };
   return (
-    <div className="uye-ol row justify-content-center">
+    <div className="uye-ol row justify-content-center fadeIn">
       <div className="p-0 col-lg-5 col-8 d-flex justify-content-lg-start justify-content-center">
         <h2>Üye Ol</h2>
       </div>
