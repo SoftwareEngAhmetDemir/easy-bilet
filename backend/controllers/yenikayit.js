@@ -17,7 +17,11 @@ api.post("/", (req, res) => {
     const kayit = new kayitModel(req.body);
     kayit.save(function (err, result) {
       if (err) {
-        res.json({ msg: msg.error });
+        console.log(err)
+        let ert = err.toString().search("duplicate key");
+        if(ert!==-1)
+        res.json({ msg: msg.DuplicateEmail });
+        else res.json({msg: ert})
       } else {
         res.json({ msg: msg.createdSucess });
       }

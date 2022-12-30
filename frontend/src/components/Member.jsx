@@ -20,6 +20,12 @@ function Member() {
         alert("Yeni Hesap Başarıyla oluşturuldu");
         navigate("/login");
       }
+      else if(msg===422){
+        alert("Bu Hesap Mevcuttur");
+      }
+      else {
+        alert(msg)
+      }
     });
   };
   return (
