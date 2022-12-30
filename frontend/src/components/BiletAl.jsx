@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
@@ -13,11 +13,15 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import loadingImg from "../assets/loading.gif";
 function BiletAl() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [value, setValue] = React.useState(dayjs("2022-04-07"));
   const nereden = useRef(null);
   const nereye = useRef(null);
-
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 700);
+  }, []);
   const navigate = useNavigate();
   const submit = () => {
     let from = nereden.current;
@@ -58,12 +62,13 @@ function BiletAl() {
           console.log(data);
           let { results } = data;
           console.log(results);
+
           setTimeout(() => {
             setLoading(false);
-          }, 3000);
+          }, 1000);
           setTimeout(() => {
             navigate("sefersec", { state: { seyahatlar: results } });
-          }, 3000);
+          }, 1000);
         } else if (data.msg === 404) window.alert("Yolculuk yoktur");
       });
   };
@@ -74,10 +79,7 @@ function BiletAl() {
       {loading ? (
         <div>
           {" "}
-          <div
-            className="d-flex justify-content-center loading-icon fadeOut"
-            id="loading"
-          >
+          <div className="d-flex justify-content-center fadeIn mt-5" id="loading">
             <img
               className="d-block"
               width="100px"
@@ -87,7 +89,7 @@ function BiletAl() {
           </div>
         </div>
       ) : (
-        <div className="biletAl mt-3">
+        <div className="biletAl mt-3 fadeIn">
           <form
             className="row border rounded p-4"
             style={{ maxWidth: "500px" }}
