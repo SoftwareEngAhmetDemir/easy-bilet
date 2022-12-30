@@ -95,6 +95,7 @@ function Login() {
           navigate("/biletal");
         } else {
           window.alert("Şifre Veya Kullanıcı adı yanlıştır");
+        throw new Error("error")
         }
       })
       .catch((err) => err);

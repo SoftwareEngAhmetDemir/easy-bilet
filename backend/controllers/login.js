@@ -35,6 +35,7 @@ api.post("/", async (req, res) => {
       } else return res.json({ msg: msg.error });
     });
   }
+  else return res.json({msg: msg.LoginFaild})
 });
 
 export default api;
