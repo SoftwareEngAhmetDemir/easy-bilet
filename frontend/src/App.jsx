@@ -34,7 +34,8 @@ function App() {
         response.headers.token = token;
       }
       if (response.data.msg === 401) {
-        window.location.href = "/login";
+        // window.location.href = "/login";
+        logout();
       }
 
       return response;
@@ -94,7 +95,8 @@ function App() {
       req.headers.token = token;
     }
     if (req.data?.msg === 401) {
-      window.location.href = "/login";
+      // window.location.href = "/login";
+      logout();
     }
    
     return req;
