@@ -1,14 +1,15 @@
 import express from "express";
 import { msg } from "./controllers/responseMsgs.js";
-
+const path = require("path");
 const app = express();
-const port = 8090;
+const hostname="0.0.0.0"
+const port = process.env.PORT || 8090;
 var bodyParser = require("body-parser");
 import jwt from "jsonwebtoken";
 import cors from "cors";
 var tokenglobal = "";
 var session = require("express-session");
-
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 const oneDay = 1000 * 60 * 60 * 24;
 // parse application/json
@@ -54,7 +55,9 @@ app.post("/*", (req, res, next) => {
 });
 
 app.use("/", routing);
-
-app.listen(port, () => {
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+ });
+app.listen(port, hostname,() => {
   console.log(`Example app listening on port ${port}`);
 });

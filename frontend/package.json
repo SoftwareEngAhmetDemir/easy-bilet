@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",
+    "eslint-plugin-disable": "^2.0.3",
     "redux-devtools": "^3.7.0"
   }
 }
