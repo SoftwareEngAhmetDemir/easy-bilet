@@ -58,6 +58,6 @@ app.use("/", routing);
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
  });
-app.listen(port, hostname,() => {
+app.listen(port,() => {
   console.log(`Example app listening on port ${port}`);
 });
